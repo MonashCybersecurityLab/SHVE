@@ -1,6 +1,6 @@
 package edu.monash.shangqi.generator;
 
-import edu.monash.shangqi.param.HVEParameters;
+import edu.monash.shangqi.param.HVEParameter;
 import it.unisa.dia.gas.jpbc.Element;
 import it.unisa.dia.gas.jpbc.Pairing;
 import it.unisa.dia.gas.jpbc.PairingParameters;
@@ -32,15 +32,16 @@ public class HVEParameterGenerator {
         this.attributeLengths = new int[n];
 
         for(int i = 0; i < this.attributeLengths.length; ++i) {
+            // indicates how many bits per attribute
             this.attributeLengths[i] = numBitsPerAttribute;
         }
 
         this.pairing = PairingFactory.getPairing(curveParams);
     }
 
-    public HVEParameters generateParameters() {
+    public HVEParameter generateParameters() {
         Element g = this.pairing.getGT().newElement().setToRandom();
-        return new HVEParameters(this.curveParams, g.getImmutable(), this.attributeLengths);
+        return new HVEParameter(this.curveParams, g.getImmutable(), this.attributeLengths);
     }
 
 }

@@ -4,16 +4,16 @@ import org.bouncycastle.crypto.KeyGenerationParameters;
 
 import java.security.SecureRandom;
 
-public class HVEKeyGenerationParameters extends KeyGenerationParameters {
+public class HVEKeyGenerationParameter extends KeyGenerationParameters {
 
-    private HVEParameters params;
+    private HVEParameter params;
 
-    public HVEKeyGenerationParameters(SecureRandom random, HVEParameters params) {
+    public HVEKeyGenerationParameter(SecureRandom random, HVEParameter params) {
         super(random, params.getG().getField().getLengthInBytes());
         this.params = params;
     }
 
-    public HVEParameters getParameters() {
+    public HVEParameter getParameters() {
         return this.params;
     }
 }

@@ -1,9 +1,9 @@
-package edu.monash.shangqi.core;
+package edu.monash.shangqi;
 
 import edu.monash.shangqi.generator.HVEKeyPairGenerator;
 import edu.monash.shangqi.generator.HVEParameterGenerator;
-import edu.monash.shangqi.param.HVEKeyGenerationParameters;
-import edu.monash.shangqi.param.HVEParameters;
+import edu.monash.shangqi.param.HVEKeyGenerationParameter;
+import edu.monash.shangqi.param.HVEParameter;
 import it.unisa.dia.gas.plaf.jpbc.pairing.PairingFactory;
 import org.bouncycastle.crypto.AsymmetricCipherKeyPair;
 
@@ -15,12 +15,12 @@ public class HVE {
 
     public static AsymmetricCipherKeyPair setup(int n) {
         HVEKeyPairGenerator generator = new HVEKeyPairGenerator();
-        generator.init(new HVEKeyGenerationParameters(new SecureRandom(), genBinaryParam(n)));
+        generator.init(new HVEKeyGenerationParameter(new SecureRandom(), genBinaryParam(n)));
 
         return generator.generateKeyPair();
     }
 
-    private static HVEParameters genBinaryParam(int n) {
+    private static HVEParameter genBinaryParam(int n) {
         HVEParameterGenerator generator = new HVEParameterGenerator();
         generator.init(n, PairingFactory.getPairingParameters("params/curves/a.properties"));
 
@@ -28,4 +28,7 @@ public class HVE {
     }
 
 
+    public static void main(String[] args) {
+        HVE.setup(287551751);
+    }
 }

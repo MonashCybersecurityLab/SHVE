@@ -1,7 +1,7 @@
 package edu.monash.shangqi.generator;
 
-import edu.monash.shangqi.param.HVEKeyGenerationParameters;
-import edu.monash.shangqi.param.HVEParameters;
+import edu.monash.shangqi.param.HVEKeyGenerationParameter;
+import edu.monash.shangqi.param.HVEParameter;
 import it.unisa.dia.gas.jpbc.Element;
 import it.unisa.dia.gas.jpbc.ElementPow;
 import it.unisa.dia.gas.jpbc.Pairing;
@@ -12,21 +12,24 @@ import org.bouncycastle.crypto.KeyGenerationParameters;
 
 public class HVEKeyPairGenerator implements AsymmetricCipherKeyPairGenerator {
 
-    private HVEKeyGenerationParameters param;
+    private HVEKeyGenerationParameter param;
 
     public HVEKeyPairGenerator() {
     }
 
     public void init(KeyGenerationParameters param) {
-        this.param = (HVEKeyGenerationParameters)param;
+        this.param = (HVEKeyGenerationParameter)param;
     }
 
     public AsymmetricCipherKeyPair generateKeyPair() {
-        HVEParameters parameters = this.param.getParameters();
+        HVEParameter parameters = this.param.getParameters();
         parameters.preProcess();
         Pairing pairing = PairingFactory.getPairing(parameters.getParameters());
         Element g = parameters.getG();
         ElementPow powG = parameters.getElementPowG();
+        int n = parameters.getN();
+        Element y = pairing.getZr().newElement().setToRandom();
+        Element Y = pairing.pairing(g, g).powZn(y);
 
         return null;
     }
