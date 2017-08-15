@@ -40,7 +40,7 @@ public class HVEParameterGenerator {
     }
 
     public HVEParameter generateParameters() {
-        Element g = this.pairing.getGT().newElement().setToRandom();
+        Element g = this.pairing.getG1().newElement().setToRandom();
         return new HVEParameter(this.curveParams, g.getImmutable(), this.attributeLengths);
     }
 

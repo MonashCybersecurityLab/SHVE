@@ -16,7 +16,6 @@ public class HVE {
     public static AsymmetricCipherKeyPair setup(int n) {
         HVEKeyPairGenerator generator = new HVEKeyPairGenerator();
         generator.init(new HVEKeyGenerationParameter(new SecureRandom(), genBinaryParam(n)));
-
         return generator.generateKeyPair();
     }
 
@@ -29,6 +28,6 @@ public class HVE {
 
 
     public static void main(String[] args) {
-        HVE.setup(287551751);
+        HVE.setup(28755175);
     }
 }
