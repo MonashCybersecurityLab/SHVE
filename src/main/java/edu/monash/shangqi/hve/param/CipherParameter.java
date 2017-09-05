@@ -1,4 +1,4 @@
 package edu.monash.shangqi.hve.param;
 
-public class SHVEEncryptionParameter {
+public interface CipherParameter {
 }

@@ -18,13 +18,13 @@ public final class RandomUtil {
     }
 
     /**
-     * Generate a random HEX string with
+     * Generate a random byte array with
      * specific length.
      *
      * @param numBits the length of random string(in a bit form)
      * @return a string in the HEX form
      */
-    public static String getRandom(int numBits) {
-        return new BigInteger(numBits, secureRandom).toString(16).toUpperCase();
+    public static byte[] getRandom(int numBits) {
+        return new BigInteger(numBits, secureRandom).toByteArray();
     }
 }

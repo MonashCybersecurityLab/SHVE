@@ -33,11 +33,11 @@ public final class AESUtil {
      * @param password secret key of AES
      * @return encrypted {@param content}
      */
-    public static String encrypt(String content, String password){
+    public static String encrypt(String content, byte[] password){
         try {
             KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
             SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
-            random.setSeed(password.getBytes());
+            random.setSeed(password);
             keyGenerator.init(128, random);
             SecretKey secretKey = keyGenerator.generateKey();
             byte[] enCodeFormat = secretKey.getEncoded();
@@ -58,11 +58,11 @@ public final class AESUtil {
      * @param password secret key of AES
      * @return decrypted {@param content}
      */
-    public static String decrypt(String content, String password) {
+    public static String decrypt(String content, byte[] password) {
         try {
             KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
             SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
-            random.setSeed(password.getBytes());
+            random.setSeed(password);
             keyGenerator.init(128, random);
             SecretKey secretKey = keyGenerator.generateKey();
             byte[] enCodeFormat = secretKey.getEncoded();

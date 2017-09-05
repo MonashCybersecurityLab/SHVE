@@ -1,13 +1,16 @@
-package edu.monash.shangqi.hve.param;
+package edu.monash.shangqi.hve.param.impl;
+
+import edu.monash.shangqi.hve.param.KeyGenerationParameter;
 
 import java.util.Arrays;
 
-public final class SHVESecretKeyGenerationParameter {
+public final class SHVESecretKeyGenerationParameter extends KeyGenerationParameter {
 
     private SHVEMasterSecretKeyParameter masterSecretKey;
     private int[] pattern;
 
     public SHVESecretKeyGenerationParameter(SHVEMasterSecretKeyParameter masterSecretKey, int... pattern) {
+        super(-1);
         this.masterSecretKey = masterSecretKey;
         this.pattern = Arrays.copyOf(pattern, pattern.length);
     }

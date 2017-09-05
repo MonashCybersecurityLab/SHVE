@@ -1,6 +1,6 @@
-package edu.monash.shangqi.hve.generator;
+package edu.monash.shangqi.hve.generator.impl;
 
-import edu.monash.shangqi.hve.param.SHVEParameter;
+import edu.monash.shangqi.hve.param.impl.SHVEParameter;
 
 public class SHVEParameterGenerator {
 
