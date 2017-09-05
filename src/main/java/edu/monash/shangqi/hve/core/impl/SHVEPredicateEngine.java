@@ -1,11 +1,12 @@
 package edu.monash.shangqi.hve.core.impl;
 
-import edu.monash.shangqi.hve.core.SymmetricBlockCipher;
+import edu.monash.shangqi.hve.core.PredicateOnlyAESSymmetricBlockCipher;
 import edu.monash.shangqi.hve.param.SHVEKeyParameter;
 import edu.monash.shangqi.hve.param.impl.SHVEEncryptionParameter;
 import edu.monash.shangqi.hve.param.impl.SHVESecretKeyParameter;
 
-public class SHVEPredicateEngine extends SymmetricBlockCipher {
+public class SHVEPredicateEngine
+        extends PredicateOnlyAESSymmetricBlockCipher {
 
     private int size;
 

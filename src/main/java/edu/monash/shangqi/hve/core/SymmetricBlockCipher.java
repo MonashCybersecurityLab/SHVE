@@ -1,18 +1,14 @@
 package edu.monash.shangqi.hve.core;
 
-import edu.monash.shangqi.hve.param.KeyParameter;
+import edu.monash.shangqi.hve.param.CipherParameter;
 
-public abstract class SymmetricBlockCipher implements CipherEngine {
+public interface SymmetricBlockCipher {
 
-    protected boolean forEncryption;
-    protected KeyParameter key;
+    void init(boolean forEncryption, CipherParameter parameter);
 
-    protected SymmetricBlockCipher() {}
+    int getInputBlockSize();
 
-    public void init(boolean forEncryption, KeyParameter parameter) {
-        this.forEncryption = forEncryption;
-        this.key = parameter;
-    }
+    int getOutputBlockSize();
 
-    public abstract void initialize();
+    byte[] processBlock(byte[] in, int inOff, int inLen);
 }
