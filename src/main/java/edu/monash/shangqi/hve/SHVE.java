@@ -41,8 +41,7 @@ public class SHVE {
     public static byte[] enc(KeyParameter masterSecretKey, int... attributes) {
         SHVEPredicateEngine engine = new SHVEPredicateEngine();
         engine.init(true, new SHVEEncryptionParameter((SHVEMasterSecretKeyParameter) masterSecretKey, attributes));
-        //return engine.process();
-        return null;
+        return engine.process();
     }
 
     public static void main(String[] args) {
@@ -52,5 +51,7 @@ public class SHVE {
         int[][] vectors = {{1,1,-1,0,1},{1,1,0,0,1}};
 
         SHVESecretKeyParameter sk = (SHVESecretKeyParameter) keyGen(MSK, vectors[0]);
+
+        enc(MSK, vectors[1]);
     }
 }

@@ -11,7 +11,7 @@ public class SHVEEncryptionParameter extends SHVEKeyParameter {
     private int[] attributes;
 
     public SHVEEncryptionParameter(SHVEMasterSecretKeyParameter masterSecretKey, int[] attributes) {
-        super(false, masterSecretKey.getParameter());
+        super(true, masterSecretKey.getParameter());
         this.masterSecretKey = masterSecretKey;
         this.attributes = Arrays.copyOf(attributes, attributes.length);
     }
