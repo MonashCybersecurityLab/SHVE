@@ -9,6 +9,7 @@ import edu.monash.shangqi.hve.param.impl.SHVESecretKeyParameter;
 import edu.monash.shangqi.hve.util.AESUtil;
 
 public final class SHVESecretKeyGenerator implements SecretKeyGenerator {
+
     protected SHVESecretKeyGenerationParameter parameter;
     protected int[] pattern;
 

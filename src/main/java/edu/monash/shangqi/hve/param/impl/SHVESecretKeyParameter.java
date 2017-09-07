@@ -15,6 +15,18 @@ public final class SHVESecretKeyParameter extends SHVEKeyParameter {
         this.B = Arrays.copyOf(B, B.length);
     }
 
+    public boolean isStar(int index) {
+        return this.getBAt(index) == 1;
+    }
+
+    public String getDAt(int index) {
+        return this.D[index];
+    }
+
+    public int getBAt(int index) {
+        return this.B[index];
+    }
+
     public String[] getDs() {
         return (String[])Arrays.copyOf(this.D, this.D.length);
     }

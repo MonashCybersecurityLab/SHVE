@@ -7,6 +7,9 @@ import edu.monash.shangqi.hve.generator.impl.SHVESecretKeyGenerator;
 import edu.monash.shangqi.hve.param.*;
 import edu.monash.shangqi.hve.param.impl.*;
 
+import javax.crypto.SecretKey;
+import java.util.Random;
+
 public class SHVE {
 
     public SHVE() {}
@@ -44,14 +47,46 @@ public class SHVE {
         return engine.process();
     }
 
+    public static boolean evaluate(KeyParameter secretKey, byte[] ct) {
+        SHVEPredicateEngine engine = new SHVEPredicateEngine();
+        engine.init(false, secretKey);
+        return engine.evaluate(ct);
+    }
+
+
+    public static int[][] createNonMatchingVectors(int size) {
+        int[][] result = new int[2][size];
+        Random random = new Random();
+        for (int i = 0; i < size; i++) {
+            if (i != 0  && i != 1 && random.nextBoolean()) {// it's a star
+                result[0][i] = -1;
+                result[1][i] = random.nextInt(2);
+            } else {
+                result[0][i] = random.nextInt(2);
+                result[1][i] = 1 - result[0][i];
+            }
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
-        int n = 5;
+        int n = 1000000;
+        long start, end;
         KeyParameter MSK = setup(n);
 
-        int[][] vectors = {{1,1,-1,0,1},{1,1,0,0,1}};
+        //int[][] vectors = {{1,1,-1,0,1},{1,1,0,0,1}};
+        int[][] vectors = createNonMatchingVectors(n);
 
+        start = System.nanoTime();
         SHVESecretKeyParameter sk = (SHVESecretKeyParameter) keyGen(MSK, vectors[0]);
+        end = System.nanoTime();
 
-        enc(MSK, vectors[1]);
+        System.out.println(end - start);
+
+        System.out.println(evaluate(
+                keyGen(MSK, vectors[0]),
+                enc(MSK, vectors[1])));
+
+
     }
 }
