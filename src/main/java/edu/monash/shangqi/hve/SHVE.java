@@ -70,7 +70,7 @@ public class SHVE {
     }
 
     public static void main(String[] args) {
-        int n = 1000000;
+        int n = 10000000;
         long start, end;
         KeyParameter MSK = setup(n);
 
@@ -82,10 +82,11 @@ public class SHVE {
         end = System.nanoTime();
 
         System.out.println(end - start);
-
-        System.out.println(evaluate(
-                keyGen(MSK, vectors[0]),
+        start = System.nanoTime();
+        System.out.println(evaluate(sk,
                 enc(MSK, vectors[1])));
+        end = System.nanoTime();
+        System.out.println(end - start);
 
 
     }

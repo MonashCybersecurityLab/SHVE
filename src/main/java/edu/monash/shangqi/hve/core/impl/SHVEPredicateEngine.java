@@ -40,7 +40,6 @@ public class SHVEPredicateEngine
         ArrayList<String> S;
 
         if (this.key instanceof SHVESecretKeyParameter) {   // evaluation
-            int offset = inOff;
             SHVESecretKeyParameter secretKey = (SHVESecretKeyParameter)this.key;
             C = new ArrayList<>();
             S = new ArrayList<>();
@@ -75,21 +74,14 @@ public class SHVEPredicateEngine
         } else if (inLen <= this.inBytes && inLen >= this.inBytes) {    // encryption
             SHVEEncryptionParameter encParams = (SHVEEncryptionParameter)this.key;
             SHVEMasterSecretKeyParameter pk = encParams.getMasterSecretKey();
-            C = new ArrayList<>();
-            S = new ArrayList<>();
-
-            for(int i = 0; i < this.size; ++i) {
-                int j = encParams.getAttributeAt(i);
-                C.add(AESUtil.encrypt(String.valueOf(j).concat(String.valueOf(i)), pk.getMSK()));
-                S.add(AESUtil.encrypt(String.valueOf(-1).concat(String.valueOf(i)), pk.getMSK()));
-            }
 
             ByteArrayOutputStream outputStream;
             try {
                 outputStream = new ByteArrayOutputStream(this.getOutputBlockSize());
                 for (int i = 0; i < this.size; ++i) {
-                    outputStream.write(C.get(i).getBytes());
-                    outputStream.write(S.get(i).getBytes());
+                    int j = encParams.getAttributeAt(i);
+                    outputStream.write(AESUtil.encrypt(String.valueOf(j).concat(String.valueOf(i)), pk.getMSK()).getBytes());
+                    outputStream.write(AESUtil.encrypt(String.valueOf(-1).concat(String.valueOf(i)), pk.getMSK()).getBytes());
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);

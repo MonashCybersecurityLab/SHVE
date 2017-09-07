@@ -44,7 +44,7 @@ public final class AESUtil {
             SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");
             Cipher cipher = Cipher.getInstance("AES");
             cipher.init(Cipher.ENCRYPT_MODE, key);
-            return CodecUtil.encodeBase64(cipher.doFinal(content.getBytes()));
+            return new String(cipher.doFinal(content.getBytes()));
         } catch (Exception e) {
             LOGGER.error("Encryption failed", e);
             throw new RuntimeException(e);
@@ -69,7 +69,7 @@ public final class AESUtil {
             SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");
             Cipher cipher = Cipher.getInstance("AES");
             cipher.init(Cipher.DECRYPT_MODE, key);
-            byte[] plain = cipher.doFinal(CodecUtil.decodeBase64(content));
+            byte[] plain = cipher.doFinal(content.getBytes());
             return new String(plain);
         } catch (Exception e) {
             LOGGER.error("Decryption failed", e);
