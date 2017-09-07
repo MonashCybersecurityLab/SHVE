@@ -37,23 +37,19 @@ public class SHVEPredicateEngine
 
     public byte[] process(byte[] in, int inOff, int inLen) {
         ArrayList<String> C;
-        ArrayList<String> S;
 
         if (this.key instanceof SHVESecretKeyParameter) {   // evaluation
             SHVESecretKeyParameter secretKey = (SHVESecretKeyParameter)this.key;
             C = new ArrayList<>();
-            S = new ArrayList<>();
 
             DataInputStream inputStream;
             inputStream = new DataInputStream(new ByteArrayInputStream(in));
 
             for(int i = 0; i < this.size; ++i) {
                 try {
-                    byte[] res = new byte[24];
-                    inputStream.read(res);
+                    byte[] res = new byte[16];
+                    inputStream.read(res, 0, 16);
                     C.add(new String(res));
-                    inputStream.read(res);
-                    S.add(new String(res));
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -62,9 +58,7 @@ public class SHVEPredicateEngine
 
             boolean result = true;
             for(int i = 0; i < secretKey.getParameter().getSize(); ++i) {
-                if (secretKey.isStar(i)) {
-                    result &= secretKey.getDAt(i).equals(S.get(i));
-                } else {
+                if (!secretKey.isStar(i)) {
                     result &= secretKey.getDAt(i).equals(C.get(i));
                 }
             }
@@ -81,7 +75,6 @@ public class SHVEPredicateEngine
                 for (int i = 0; i < this.size; ++i) {
                     int j = encParams.getAttributeAt(i);
                     outputStream.write(AESUtil.encrypt(String.valueOf(j).concat(String.valueOf(i)), pk.getMSK()).getBytes());
-                    outputStream.write(AESUtil.encrypt(String.valueOf(-1).concat(String.valueOf(i)), pk.getMSK()).getBytes());
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);
