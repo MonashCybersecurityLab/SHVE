@@ -48,7 +48,7 @@ public class SHVEPredicateEngine
             for(int i = 0; i < this.size; ++i) {
                 try {
                     byte[] res = new byte[16];
-                    inputStream.read(res, 0, 16);
+                    inputStream.read(res);
                     C.add(res);
                 } catch (IOException e) {
                     throw new RuntimeException(e);

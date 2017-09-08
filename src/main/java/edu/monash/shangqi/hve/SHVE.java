@@ -70,12 +70,12 @@ public class SHVE {
     }
 
     public static void main(String[] args) {
-        int n = 10000000;
+        int n = 5;
         long start, end;
         KeyParameter MSK = setup(n);
 
-        //int[][] vectors = {{1,1,-1,0,1},{1,1,0,0,1}};
-        int[][] vectors = createNonMatchingVectors(n);
+        int[][] vectors = {{1,1,-1,0,1},{1,1,0,0,1}};
+        //int[][] vectors = createNonMatchingVectors(n);
 
         start = System.nanoTime();
         SHVESecretKeyParameter sk = (SHVESecretKeyParameter) keyGen(MSK, vectors[0]);
