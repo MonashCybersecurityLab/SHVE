@@ -7,7 +7,6 @@ import edu.monash.shangqi.hve.generator.impl.SHVESecretKeyGenerator;
 import edu.monash.shangqi.hve.param.*;
 import edu.monash.shangqi.hve.param.impl.*;
 
-import javax.crypto.SecretKey;
 import java.util.Random;
 
 public class SHVE {
@@ -72,6 +71,7 @@ public class SHVE {
     public static void main(String[] args) {
         int n = 5;
         long start, end;
+        //TODO: change n to long
         KeyParameter MSK = setup(n);
 
         int[][] vectors = {{1,1,-1,0,1},{1,1,0,0,1}};
