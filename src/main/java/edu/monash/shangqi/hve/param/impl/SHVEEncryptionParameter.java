@@ -1,7 +1,6 @@
 package edu.monash.shangqi.hve.param.impl;
 
 import edu.monash.shangqi.hve.param.SHVEKeyParameter;
-import edu.monash.shangqi.hve.param.impl.SHVEMasterSecretKeyParameter;
 
 import java.util.Arrays;
 
