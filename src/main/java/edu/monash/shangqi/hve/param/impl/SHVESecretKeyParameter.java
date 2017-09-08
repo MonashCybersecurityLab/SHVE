@@ -2,16 +2,17 @@ package edu.monash.shangqi.hve.param.impl;
 
 import edu.monash.shangqi.hve.param.SHVEKeyParameter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public final class SHVESecretKeyParameter extends SHVEKeyParameter {
 
-    private String[] D;
+    private ArrayList<byte[]> D;
     private int[] B;
 
-    public SHVESecretKeyParameter(SHVEParameter parameter, String[] D, int[] B) {
+    public SHVESecretKeyParameter(SHVEParameter parameter, ArrayList<byte[]> D, int[] B) {
         super(false, parameter);
-        this.D = Arrays.copyOf(D, D.length);
+        this.D = new ArrayList<>(D);
         this.B = Arrays.copyOf(B, B.length);
     }
 
@@ -19,16 +20,16 @@ public final class SHVESecretKeyParameter extends SHVEKeyParameter {
         return this.getBAt(index) == 1;
     }
 
-    public String getDAt(int index) {
-        return this.D[index];
+    public byte[] getDAt(int index) {
+        return this.D.get(index);
     }
 
     public int getBAt(int index) {
         return this.B[index];
     }
 
-    public String[] getDs() {
-        return (String[])Arrays.copyOf(this.D, this.D.length);
+    public ArrayList<byte[]> getDs() {
+        return new ArrayList<>(this.D);
     }
 
     public int[] getBs() {

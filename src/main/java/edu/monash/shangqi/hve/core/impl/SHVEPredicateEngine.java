@@ -12,7 +12,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Arrays;
 
 public class SHVEPredicateEngine
         extends PredicateOnlyAESSymmetricBlockCipher {
@@ -36,7 +36,7 @@ public class SHVEPredicateEngine
     }
 
     public byte[] process(byte[] in, int inOff, int inLen) {
-        ArrayList<String> C;
+        ArrayList<byte[]> C;
 
         if (this.key instanceof SHVESecretKeyParameter) {   // evaluation
             SHVESecretKeyParameter secretKey = (SHVESecretKeyParameter)this.key;
@@ -49,7 +49,7 @@ public class SHVEPredicateEngine
                 try {
                     byte[] res = new byte[16];
                     inputStream.read(res, 0, 16);
-                    C.add(new String(res));
+                    C.add(res);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -59,7 +59,7 @@ public class SHVEPredicateEngine
             boolean result = true;
             for(int i = 0; i < secretKey.getParameter().getSize(); ++i) {
                 if (!secretKey.isStar(i)) {
-                    result &= secretKey.getDAt(i).equals(C.get(i));
+                    result &= Arrays.equals(secretKey.getDAt(i), C.get(i));
                 }
             }
 
@@ -74,7 +74,7 @@ public class SHVEPredicateEngine
                 outputStream = new ByteArrayOutputStream(this.getOutputBlockSize());
                 for (int i = 0; i < this.size; ++i) {
                     int j = encParams.getAttributeAt(i);
-                    outputStream.write(AESUtil.encrypt(String.valueOf(j).concat(String.valueOf(i)), pk.getMSK()).getBytes());
+                    outputStream.write(AESUtil.encrypt(String.valueOf(j).concat(String.valueOf(i)).getBytes(), pk.getMSK()));
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);

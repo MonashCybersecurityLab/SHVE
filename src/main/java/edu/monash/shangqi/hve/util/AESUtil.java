@@ -33,7 +33,7 @@ public final class AESUtil {
      * @param password secret key of AES
      * @return encrypted {@param content}
      */
-    public static String encrypt(String content, byte[] password){
+    public static byte[] encrypt(byte[] content, byte[] password){
         try {
             KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
             SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
@@ -44,7 +44,7 @@ public final class AESUtil {
             SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");
             Cipher cipher = Cipher.getInstance("AES");
             cipher.init(Cipher.ENCRYPT_MODE, key);
-            return new String(cipher.doFinal(content.getBytes()));
+            return cipher.doFinal(content);
         } catch (Exception e) {
             LOGGER.error("Encryption failed", e);
             throw new RuntimeException(e);
@@ -58,7 +58,7 @@ public final class AESUtil {
      * @param password secret key of AES
      * @return decrypted {@param content}
      */
-    public static String decrypt(String content, byte[] password) {
+    public static byte[] decrypt(byte[] content, byte[] password) {
         try {
             KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
             SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
@@ -69,8 +69,7 @@ public final class AESUtil {
             SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");
             Cipher cipher = Cipher.getInstance("AES");
             cipher.init(Cipher.DECRYPT_MODE, key);
-            byte[] plain = cipher.doFinal(content.getBytes());
-            return new String(plain);
+            return cipher.doFinal(content);
         } catch (Exception e) {
             LOGGER.error("Decryption failed", e);
             throw new RuntimeException(e);
