@@ -69,22 +69,26 @@ public class SHVE {
     }
 
     public static void main(String[] args) {
-        int n = 5;
+        int n = 10000000;
         long start, end;
         //TODO: change n to long
         KeyParameter MSK = setup(n);
 
-        int[][] vectors = {{1,1,-1,0,1},{1,1,0,0,1}};
-        //int[][] vectors = createNonMatchingVectors(n);
+        //int[][] vectors = {{1,1,-1,0,1},{1,1,0,0,1}};
+        int[][] vectors = createNonMatchingVectors(n);
 
         start = System.nanoTime();
         SHVESecretKeyParameter sk = (SHVESecretKeyParameter) keyGen(MSK, vectors[0]);
         end = System.nanoTime();
-
         System.out.println(end - start);
+
         start = System.nanoTime();
-        System.out.println(evaluate(sk,
-                enc(MSK, vectors[1])));
+        byte[] res = enc(MSK, vectors[1]);
+        end = System.nanoTime();
+        System.out.println(end - start);
+
+        start = System.nanoTime();
+        System.out.println(evaluate(sk, res));
         end = System.nanoTime();
         System.out.println(end - start);
 
