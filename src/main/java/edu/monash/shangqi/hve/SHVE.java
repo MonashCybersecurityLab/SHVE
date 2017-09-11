@@ -19,14 +19,14 @@ public class SHVE {
      *
      * @param size size of message
      */
-    public static KeyParameter setup(int size) {
+    public static KeyParameter setup(long size) {
         SHVEMasterSecretKeyGenerator generator = new SHVEMasterSecretKeyGenerator();
         generator.init(new SHVEMasterSecretKeyGenerationParameter(genBinaryParam(size)));
 
         return generator.generateKey();
     }
 
-    private static SHVEParameter genBinaryParam(int size) {
+    private static SHVEParameter genBinaryParam(long size) {
         SHVEParameterGenerator generator = new SHVEParameterGenerator();
         generator.init(size);
 
@@ -53,8 +53,8 @@ public class SHVE {
     }
 
 
-    public static int[][] createNonMatchingVectors(int size) {
-        int[][] result = new int[2][size];
+    public static int[][] createNonMatchingVectors(long size) {
+        int[][] result = new int[2][(int)size];
         Random random = new Random();
         for (int i = 0; i < size; i++) {
             if (i != 0  && i != 1 && random.nextBoolean()) {// it's a star
@@ -69,7 +69,7 @@ public class SHVE {
     }
 
     public static void main(String[] args) {
-        int n = 10000000;
+        long n = 10000000;
         long start, end;
         //TODO: change n to long
         KeyParameter MSK = setup(n);
