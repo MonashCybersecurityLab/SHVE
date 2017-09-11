@@ -13,19 +13,18 @@ import java.util.ArrayList;
 public final class SHVESecretKeyGenerator implements SecretKeyGenerator {
 
     private SHVESecretKeyGenerationParameter parameter;
-    private int[] pattern;
 
     public SHVESecretKeyGenerator() {
     }
 
     public void init(KeyGenerationParameter parameter) {
         this.parameter = (SHVESecretKeyGenerationParameter) parameter;
-        this.pattern = this.parameter.getPattern();
-        if (this.pattern == null) {
+        int[] pattern = this.parameter.getPattern();
+        if (pattern == null) {
             throw new IllegalArgumentException("pattern cannot be null.");
         } else {
-            int n = this.parameter.getMasterSecretKey().getParameter().getSize();
-            if (this.pattern.length != n) {
+            long n = this.parameter.getMasterSecretKey().getParameter().getSize();
+            if (pattern.length != n) {
                 throw new IllegalArgumentException("pattern length not valid.");
             }
         }
@@ -33,9 +32,9 @@ public final class SHVESecretKeyGenerator implements SecretKeyGenerator {
 
     public KeyParameter generateKey() {
         SHVEMasterSecretKeyParameter masterSecretKey = this.parameter.getMasterSecretKey();
-        int size = masterSecretKey.getParameter().getSize();
+        long size = masterSecretKey.getParameter().getSize();
         ArrayList<byte[]> D = new ArrayList<>();
-        int[] B = new int[size];
+        int[] B = new int[(int)size];
 
         for(int i = 0; i < size; ++i) {
 

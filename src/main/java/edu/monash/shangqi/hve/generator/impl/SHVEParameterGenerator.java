@@ -4,22 +4,13 @@ import edu.monash.shangqi.hve.param.impl.SHVEParameter;
 
 public class SHVEParameterGenerator {
 
-    private int[] attributeLengths;
+    private long attributeLengths;
 
     public SHVEParameterGenerator() {
     }
 
-    public void init(int n) {
-        this.init(n, 1);
-    }
-
-    public void init(int n, int numBitsPerAttribute) {
-
-        this.attributeLengths = new int[n];
-
-        for(int i = 0; i < this.attributeLengths.length; ++i) {
-            this.attributeLengths[i] = numBitsPerAttribute;
-        }
+    public void init(long size) {
+        this.attributeLengths = size;
     }
 
     public SHVEParameter generateParameters() {

@@ -17,7 +17,7 @@ import java.util.Arrays;
 public class SHVEPredicateEngine
         extends PredicateOnlyAESSymmetricBlockCipher {
 
-    private int size;
+    private long size;
 
     public SHVEPredicateEngine() {
     }
