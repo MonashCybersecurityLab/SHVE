@@ -71,7 +71,7 @@ public class SHVE {
     public static void main(String[] args) {
         long n = 10000000;
         long start, end;
-        //TODO: change n to long
+
         KeyParameter MSK = setup(n);
 
         //int[][] vectors = {{1,1,-1,0,1},{1,1,0,0,1}};
@@ -91,7 +91,5 @@ public class SHVE {
         System.out.println(evaluate(sk, res));
         end = System.nanoTime();
         System.out.println(end - start);
-
-
     }
 }

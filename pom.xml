@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>edu.monash.shangqi</groupId>
-    <artifactId>HVE</artifactId>
+    <artifactId>hve</artifactId>
     <version>1.0</version>
 
     <properties>
@@ -25,6 +25,12 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.7</version>
+        </dependency>
+        <!-- large array -->
+        <dependency>
+            <groupId>org.xerial.larray</groupId>
+            <artifactId>larray_2.12</artifactId>
+            <version>0.4.0</version>
         </dependency>
     </dependencies>
 
