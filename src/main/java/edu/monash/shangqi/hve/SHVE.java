@@ -6,6 +6,8 @@ import edu.monash.shangqi.hve.generator.impl.SHVEParameterGenerator;
 import edu.monash.shangqi.hve.generator.impl.SHVESecretKeyGenerator;
 import edu.monash.shangqi.hve.param.*;
 import edu.monash.shangqi.hve.param.impl.*;
+import xerial.larray.LBitArray;
+import xerial.larray.LByteArray;
 
 import java.util.Random;
 
@@ -40,10 +42,23 @@ public class SHVE {
         return generator.generateKey();
     }
 
+    public static KeyParameter keyGen(KeyParameter masterSecretKey, LBitArray pattern) {
+        return null;
+    }
+
+
     public static byte[] enc(KeyParameter masterSecretKey, int... attributes) {
         SHVEPredicateEngine engine = new SHVEPredicateEngine();
         engine.init(true, new SHVEEncryptionParameter((SHVEMasterSecretKeyParameter) masterSecretKey, attributes));
         return engine.process();
+    }
+
+    public static LByteArray enc(KeyParameter masterSecretKey, LBitArray... attributes) {
+        return null;
+    }
+
+    public static boolean evaluate(KeyParameter secretKey, LByteArray ct) {
+        return false;
     }
 
     public static boolean evaluate(KeyParameter secretKey, byte[] ct) {
