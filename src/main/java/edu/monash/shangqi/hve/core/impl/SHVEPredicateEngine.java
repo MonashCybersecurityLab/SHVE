@@ -36,9 +36,9 @@ public class SHVEPredicateEngine
     }
 
     public byte[] process(byte[] in, int inOff, int inLen) {
-        ArrayList<byte[]> C;
 
         if (this.key instanceof SHVESecretKeyParameter) {   // evaluation
+            ArrayList<byte[]> C;
             SHVESecretKeyParameter secretKey = (SHVESecretKeyParameter)this.key;
             C = new ArrayList<>();
 
