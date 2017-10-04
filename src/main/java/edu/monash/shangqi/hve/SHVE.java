@@ -44,9 +44,6 @@ public class SHVE {
         return engine.process();
     }
 
-    public static boolean evaluate(KeyParameter secretKey, LByteArray ct) {
-        return false;
-    }
 
     public static boolean evaluate(KeyParameter secretKey, byte[] ct) {
         SHVEPredicateEngine engine = new SHVEPredicateEngine();
