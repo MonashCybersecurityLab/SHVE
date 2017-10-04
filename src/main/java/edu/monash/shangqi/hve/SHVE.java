@@ -15,12 +15,6 @@ public class SHVE {
 
     public SHVE() {}
 
-    /**
-     * Setup the system with the size
-     * of message.
-     *
-     * @param size size of message
-     */
     public static KeyParameter setup(long size) {
         SHVEMasterSecretKeyGenerator generator = new SHVEMasterSecretKeyGenerator();
         generator.init(new SHVEMasterSecretKeyGenerationParameter(genBinaryParam(size)));
@@ -42,19 +36,12 @@ public class SHVE {
         return generator.generateKey();
     }
 
-    public static KeyParameter keyGen(KeyParameter masterSecretKey, LBitArray pattern) {
-        return null;
-    }
 
 
     public static byte[] enc(KeyParameter masterSecretKey, int... attributes) {
         SHVEPredicateEngine engine = new SHVEPredicateEngine();
         engine.init(true, new SHVEEncryptionParameter((SHVEMasterSecretKeyParameter) masterSecretKey, attributes));
         return engine.process();
-    }
-
-    public static LByteArray enc(KeyParameter masterSecretKey, LBitArray... attributes) {
-        return null;
     }
 
     public static boolean evaluate(KeyParameter secretKey, LByteArray ct) {
