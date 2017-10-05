@@ -33,18 +33,6 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.7</version>
         </dependency>
-        <!-- spark core -->
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-core_2.10</artifactId>
-            <version>1.5.2</version>
-        </dependency>
-        <!-- large array -->
-        <dependency>
-            <groupId>org.xerial.larray</groupId>
-            <artifactId>larray_2.12</artifactId>
-            <version>0.4.0</version>
-        </dependency>
     </dependencies>
 
     <build>

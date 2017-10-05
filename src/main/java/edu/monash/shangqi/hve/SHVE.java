@@ -6,8 +6,6 @@ import edu.monash.shangqi.hve.generator.impl.SHVEParameterGenerator;
 import edu.monash.shangqi.hve.generator.impl.SHVESecretKeyGenerator;
 import edu.monash.shangqi.hve.param.*;
 import edu.monash.shangqi.hve.param.impl.*;
-import xerial.larray.LBitArray;
-import xerial.larray.LByteArray;
 
 import java.util.Random;
 
