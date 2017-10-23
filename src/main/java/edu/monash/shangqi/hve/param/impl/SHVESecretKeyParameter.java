@@ -2,6 +2,7 @@ package edu.monash.shangqi.hve.param.impl;
 
 import edu.monash.shangqi.hve.param.SHVEKeyParameter;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -9,11 +10,13 @@ public final class SHVESecretKeyParameter extends SHVEKeyParameter {
 
     private ArrayList<byte[]> D;
     private int[] B;
+    private byte[] Z;
 
-    public SHVESecretKeyParameter(SHVEParameter parameter, ArrayList<byte[]> D, int[] B) {
+    public SHVESecretKeyParameter(SHVEParameter parameter, ArrayList<byte[]> D, int[] B, byte[] Z) {
         super(false, parameter);
         this.D = new ArrayList<>(D);
         this.B = Arrays.copyOf(B, B.length);
+        this.Z = Arrays.copyOf(Z, Z.length);
     }
 
     public boolean isStar(int index) {
@@ -33,6 +36,10 @@ public final class SHVESecretKeyParameter extends SHVEKeyParameter {
     }
 
     public int[] getBs() {
-        return (int[])Arrays.copyOf(this.B, this.B.length);
+        return Arrays.copyOf(this.B, this.B.length);
+    }
+
+    public byte[] getZ() {
+        return Arrays.copyOf(this.Z, this.Z.length);
     }
 }

@@ -11,6 +11,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -56,14 +57,18 @@ public class SHVEPredicateEngine
 
             }
 
-            boolean result = true;
+            byte[] z = new byte[16];
             for(int i = 0; i < secretKey.getParameter().getSize(); ++i) {
                 if (!secretKey.isStar(i)) {
-                    result &= Arrays.equals(secretKey.getDAt(i), C.get(i));
+                    byte[] d = secretKey.getDAt(i);
+                    byte[] c = C.get(i);
+                    // use xor to recover Z
+                    for (int j = 0; j < z.length; j++) {
+                        z[j] ^= (d[j] ^ c[j]);
+                    }
                 }
             }
-
-            return new byte[]{(byte)(result ? 1 : 0)};
+            return new byte[]{(byte)(Arrays.equals(secretKey.getZ(), z) ? 1 : 0)};
 
         } else if (inLen <= this.inBytes && inLen >= this.inBytes) {    // encryption
             SHVEEncryptionParameter encParams = (SHVEEncryptionParameter)this.key;

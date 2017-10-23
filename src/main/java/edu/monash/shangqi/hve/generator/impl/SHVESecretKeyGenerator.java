@@ -7,8 +7,10 @@ import edu.monash.shangqi.hve.param.impl.SHVEMasterSecretKeyParameter;
 import edu.monash.shangqi.hve.param.impl.SHVESecretKeyGenerationParameter;
 import edu.monash.shangqi.hve.param.impl.SHVESecretKeyParameter;
 import edu.monash.shangqi.hve.util.AESUtil;
+import edu.monash.shangqi.hve.util.RandomUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public final class SHVESecretKeyGenerator implements SecretKeyGenerator {
 
@@ -35,6 +37,7 @@ public final class SHVESecretKeyGenerator implements SecretKeyGenerator {
         long size = masterSecretKey.getParameter().getSize();
         ArrayList<byte[]> D = new ArrayList<>();
         int[] B = new int[(int)size];
+        byte[] Z = new byte[16];
 
         for(int i = 0; i < size; ++i) {
 
@@ -42,12 +45,18 @@ public final class SHVESecretKeyGenerator implements SecretKeyGenerator {
                 B[i] = 1;
                 D.add(null);
             } else {
-                D.add(AESUtil.encrypt(String.valueOf(this.parameter.getPatternAt(i))
-                                .concat(String.valueOf(i)).getBytes()
-                        , masterSecretKey.getMSK()));
+                byte[] d = AESUtil.encrypt(String.valueOf(this.parameter.getPatternAt(i))
+                                .concat(String.valueOf(i)).getBytes(), masterSecretKey.getMSK());
+                byte[] z = RandomUtil.getRandom(127);
+
+                for(int j = 0; j < z.length; j++) {
+                    d[j] ^= z[j];
+                    Z[j] ^= z[j];
+                }
+                D.add(d);
             }
         }
 
-        return new SHVESecretKeyParameter(masterSecretKey.getParameter(), D, B);
+        return new SHVESecretKeyParameter(masterSecretKey.getParameter(), D, B, Z);
     }
 }

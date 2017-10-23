@@ -11,6 +11,6 @@ public class KeyGenerationParameter {
     }
 
     public byte[] getRandom() {
-        return RandomUtil.getRandom(this.keyLength);
+        return RandomUtil.getRandom(this.keyLength - 1);
     }
 }
