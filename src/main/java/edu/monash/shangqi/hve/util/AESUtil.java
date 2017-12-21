@@ -1,8 +1,5 @@
 package edu.monash.shangqi.hve.util;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
@@ -24,8 +21,6 @@ import java.security.SecureRandom;
  */
 public final class AESUtil {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AESUtil.class);
-
     /**
      * Encrypt a byte array by using AES.
      *
@@ -46,7 +41,6 @@ public final class AESUtil {
             cipher.init(Cipher.ENCRYPT_MODE, key);
             return cipher.doFinal(content);
         } catch (Exception e) {
-            LOGGER.error("Encryption failed", e);
             throw new RuntimeException(e);
         }
     }
@@ -71,7 +65,6 @@ public final class AESUtil {
             cipher.init(Cipher.DECRYPT_MODE, key);
             return cipher.doFinal(content);
         } catch (Exception e) {
-            LOGGER.error("Decryption failed", e);
             throw new RuntimeException(e);
         }
     }
