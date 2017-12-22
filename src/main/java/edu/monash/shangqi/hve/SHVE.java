@@ -6,6 +6,7 @@ import edu.monash.shangqi.hve.generator.impl.SHVEParameterGenerator;
 import edu.monash.shangqi.hve.generator.impl.SHVESecretKeyGenerator;
 import edu.monash.shangqi.hve.param.*;
 import edu.monash.shangqi.hve.param.impl.*;
+import edu.monash.shangqi.hve.util.AESUtil;
 
 import java.util.Random;
 
@@ -69,7 +70,13 @@ public class SHVE {
         long n = 10000000;
         long start, end;
 
+
+
         KeyParameter MSK = setup(n);
+
+        // warm-up AES here
+        AESUtil.decrypt(AESUtil.encrypt("test".getBytes(), ((SHVEMasterSecretKeyParameter) MSK).getMSK())
+                , ((SHVEMasterSecretKeyParameter) MSK).getMSK());
 
         //int[][] vectors = {{1,1,-1,0,1},{1,1,0,0,1}};
         int[][] vectors = createNonMatchingVectors(n);
