@@ -35,28 +35,23 @@ public final class SHVESecretKeyGenerator implements SecretKeyGenerator {
     public KeyParameter generateKey() {
         SHVEMasterSecretKeyParameter masterSecretKey = this.parameter.getMasterSecretKey();
         long size = masterSecretKey.getParameter().getSize();
-        ArrayList<byte[]> D = new ArrayList<>();
         int[] B = new int[(int)size];
-        byte[] Z = new byte[16];
+        byte[] D = new byte[16];
 
         for(int i = 0; i < size; ++i) {
 
             if (this.parameter.isStarAt(i)) {
                 B[i] = 1;
-                D.add(null);
             } else {
                 byte[] d = AESUtil.encrypt(String.valueOf(this.parameter.getPatternAt(i))
                                 .concat(String.valueOf(i)).getBytes(), masterSecretKey.getMSK());
-                byte[] z = RandomUtil.getRandom(127);
 
-                for(int j = 0; j < z.length; j++) {
-                    d[j] ^= z[j];
-                    Z[j] ^= z[j];
+                for(int j = 0; j < d.length; j++) {
+                    D[j] ^= d[j];
                 }
-                D.add(d);
             }
         }
 
-        return new SHVESecretKeyParameter(masterSecretKey.getParameter(), D, B, Z);
+        return new SHVESecretKeyParameter(masterSecretKey.getParameter(), D, B);
     }
 }

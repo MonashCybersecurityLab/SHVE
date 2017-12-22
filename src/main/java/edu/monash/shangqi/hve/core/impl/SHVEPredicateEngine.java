@@ -60,15 +60,14 @@ public class SHVEPredicateEngine
             byte[] z = new byte[16];
             for(int i = 0; i < secretKey.getParameter().getSize(); ++i) {
                 if (!secretKey.isStar(i)) {
-                    byte[] d = secretKey.getDAt(i);
                     byte[] c = C.get(i);
-                    // use xor to recover Z
+                    // use xor to predicate
                     for (int j = 0; j < z.length; j++) {
-                        z[j] ^= (d[j] ^ c[j]);
+                        z[j] ^= c[j];
                     }
                 }
             }
-            return new byte[]{(byte)(Arrays.equals(secretKey.getZ(), z) ? 1 : 0)};
+            return new byte[]{(byte)(Arrays.equals(secretKey.getDs(), z) ? 1 : 0)};
 
         } else if (inLen <= this.inBytes && inLen >= this.inBytes) {    // encryption
             SHVEEncryptionParameter encParams = (SHVEEncryptionParameter)this.key;
