@@ -78,7 +78,7 @@ public class SHVEPredicateEngine
                 outputStream = new ByteArrayOutputStream(this.getOutputBlockSize());
                 for (int i = 0; i < this.size; ++i) {
                     int j = encParams.getAttributeAt(i);
-                    outputStream.write(AESUtil.encrypt(String.valueOf(j)
+                    outputStream.write(AESUtil.encode(String.valueOf(j)
                             .concat(String.valueOf(i)).getBytes(), pk.getMSK()));
                 }
             } catch (IOException e) {

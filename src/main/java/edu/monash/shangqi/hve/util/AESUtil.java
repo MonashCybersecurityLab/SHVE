@@ -1,10 +1,13 @@
 package edu.monash.shangqi.hve.util;
 
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
+import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import java.security.SecureRandom;
+import java.security.*;
 
 /**
  * This is an integrated AES package, it contains
@@ -20,6 +23,10 @@ import java.security.SecureRandom;
  * @version 0.2
  */
 public final class AESUtil {
+
+    static {
+        Security.addProvider(new BouncyCastleProvider());
+    }
 
     /**
      * Encrypt a byte array by using AES.
@@ -65,6 +72,31 @@ public final class AESUtil {
             cipher.init(Cipher.DECRYPT_MODE, key);
             return cipher.doFinal(content);
         } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Generate a AES-CMAC digest for verification.
+     *
+     * @param content the cipher text
+     * @param password secret key of AES
+     * @return AES-CMAC for {@param content}
+     */
+    public static byte[] encode(byte[] content, byte[] password) {
+        try {
+            Mac mac = Mac.getInstance("AESCMAC", "BC");
+            KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
+            SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
+            random.setSeed(password);
+            keyGenerator.init(128, random);
+            SecretKey secretKey = keyGenerator.generateKey();
+            mac.init(secretKey);
+            mac.update(content, 0, content.length);
+            return mac.doFinal();
+        } catch (InvalidKeyException
+                | NoSuchAlgorithmException
+                | NoSuchProviderException e) {
             throw new RuntimeException(e);
         }
     }

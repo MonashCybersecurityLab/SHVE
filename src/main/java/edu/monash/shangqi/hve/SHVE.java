@@ -67,7 +67,7 @@ public class SHVE {
     }
 
     public static void main(String[] args) {
-        long n = 10000000;
+        long n = 10000;
         long start, end;
 
 
@@ -75,8 +75,7 @@ public class SHVE {
         KeyParameter MSK = setup(n);
 
         // warm-up AES here
-        AESUtil.decrypt(AESUtil.encrypt("test".getBytes(), ((SHVEMasterSecretKeyParameter) MSK).getMSK())
-                , ((SHVEMasterSecretKeyParameter) MSK).getMSK());
+        AESUtil.encode("test".getBytes(), ((SHVEMasterSecretKeyParameter) MSK).getMSK());
 
         //int[][] vectors = {{1,1,-1,0,1},{1,1,0,0,1}};
         int[][] vectors = createNonMatchingVectors(n);

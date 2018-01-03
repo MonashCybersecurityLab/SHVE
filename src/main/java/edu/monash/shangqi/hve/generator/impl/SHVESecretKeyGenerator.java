@@ -43,7 +43,7 @@ public final class SHVESecretKeyGenerator implements SecretKeyGenerator {
             if (this.parameter.isStarAt(i)) {
                 B[i] = 1;
             } else {
-                byte[] d = AESUtil.encrypt(String.valueOf(this.parameter.getPatternAt(i))
+                byte[] d = AESUtil.encode(String.valueOf(this.parameter.getPatternAt(i))
                                 .concat(String.valueOf(i)).getBytes(), masterSecretKey.getMSK());
 
                 for(int j = 0; j < d.length; j++) {

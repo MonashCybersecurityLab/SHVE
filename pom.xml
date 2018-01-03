@@ -12,6 +12,16 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>1.58</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -30,8 +40,6 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
                             <mainClass>edu.monash.shangqi.hve.SHVE</mainClass>
                         </manifest>
                     </archive>
