@@ -7,11 +7,13 @@ import edu.monash.shangqi.hve.param.impl.SHVEMasterSecretKeyParameter;
 import edu.monash.shangqi.hve.param.impl.SHVESecretKeyParameter;
 import edu.monash.shangqi.hve.util.AESUtil;
 
+import javax.crypto.BadPaddingException;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -57,7 +59,7 @@ public class SHVEPredicateEngine
 
             }
 
-            byte[] z = new byte[16];
+            byte[] z = secretKey.getD0();
             for(int i = 0; i < secretKey.getParameter().getSize(); ++i) {
                 if (!secretKey.isStar(i)) {
                     byte[] c = C.get(i);
@@ -67,7 +69,13 @@ public class SHVEPredicateEngine
                     }
                 }
             }
-            return new byte[]{(byte)(Arrays.equals(secretKey.getDs(), z) ? 1 : 0)};
+            try {
+                AESUtil.decrypt(secretKey.getD1(), z);
+                return new byte[]{(byte)(1)};
+            } catch (RuntimeException e) {
+                return new byte[]{(byte)(0)};
+            }
+
 
         } else if (inLen <= this.inBytes && inLen >= this.inBytes) {    // encryption
             SHVEEncryptionParameter encParams = (SHVEEncryptionParameter)this.key;

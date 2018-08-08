@@ -8,12 +8,14 @@ import java.util.Arrays;
 
 public final class SHVESecretKeyParameter extends SHVEKeyParameter {
 
-    private byte[] D;
+    private byte[] D0;
+    private byte[] D1;
     private int[] B;
 
-    public SHVESecretKeyParameter(SHVEParameter parameter, byte[] D, int[] B) {
+    public SHVESecretKeyParameter(SHVEParameter parameter, byte[] D0, byte[] D1, int[] B) {
         super(false, parameter);
-        this.D = Arrays.copyOf(D, D.length);
+        this.D0 = Arrays.copyOf(D0, D0.length);
+        this.D1 = Arrays.copyOf(D1, D1.length);
         this.B = Arrays.copyOf(B, B.length);
     }
 
@@ -25,8 +27,12 @@ public final class SHVESecretKeyParameter extends SHVEKeyParameter {
         return this.B[index];
     }
 
-    public byte[] getDs() {
-        return Arrays.copyOf(this.D, this.D.length);
+    public byte[] getD0() {
+        return Arrays.copyOf(this.D0, this.D0.length);
+    }
+
+    public byte[] getD1() {
+        return Arrays.copyOf(this.D1, this.D1.length);
     }
 
     public int[] getBs() {
