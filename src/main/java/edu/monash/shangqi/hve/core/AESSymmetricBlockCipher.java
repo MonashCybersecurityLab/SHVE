@@ -2,6 +2,8 @@ package edu.monash.shangqi.hve.core;
 
 import edu.monash.shangqi.hve.param.CipherParameter;
 
+import java.util.List;
+
 public abstract class AESSymmetricBlockCipher implements SymmetricBlockCipher {
 
     protected boolean forEncryption;
@@ -25,7 +27,7 @@ public abstract class AESSymmetricBlockCipher implements SymmetricBlockCipher {
         this.initialize();
     }
 
-    public byte[] processBlock(byte[] in, int inOff, int inLen) {
+    public List<byte[]> processBlock(List<byte[]> in, int inOff, int inLen) {
         if (this.key == null) {
             throw new IllegalStateException("Engine not initialized");
         } else {
@@ -40,5 +42,5 @@ public abstract class AESSymmetricBlockCipher implements SymmetricBlockCipher {
 
     public abstract void initialize();
 
-    public abstract byte[] process(byte[] in, int inOff, int inLen);
+    public abstract List<byte[]> process(List<byte[]> in, int inOff, int inLen);
 }

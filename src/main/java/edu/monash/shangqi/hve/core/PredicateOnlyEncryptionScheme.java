@@ -1,9 +1,11 @@
 package edu.monash.shangqi.hve.core;
 
+import java.util.List;
+
 public interface PredicateOnlyEncryptionScheme extends SymmetricBlockCipher {
-    byte[] process();
+    List<byte[]> process();
 
-    boolean evaluate(byte[] in, int inOff, int len);
+    boolean evaluate(List<byte[]> in, int inOff, int len);
 
-    boolean evaluate(byte[] in);
+    boolean evaluate(List<byte[]> in);
 }

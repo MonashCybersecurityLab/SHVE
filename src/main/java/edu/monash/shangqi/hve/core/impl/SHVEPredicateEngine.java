@@ -16,6 +16,7 @@ import java.lang.reflect.Array;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class SHVEPredicateEngine
         extends PredicateOnlyAESSymmetricBlockCipher {
@@ -38,27 +39,15 @@ public class SHVEPredicateEngine
         this.size = hveKey.getParameter().getSize();
     }
 
-    public byte[] process(byte[] in, int inOff, int inLen) {
+    public List<byte[]> process(List<byte[]> C, int inOff, int inLen) {
+
+        long start, end;
 
         if (this.key instanceof SHVESecretKeyParameter) {   // evaluation
-            ArrayList<byte[]> C;
+            List<byte[]> res = new ArrayList<>();
             SHVESecretKeyParameter secretKey = (SHVESecretKeyParameter)this.key;
-            C = new ArrayList<>();
 
-            DataInputStream inputStream;
-            inputStream = new DataInputStream(new ByteArrayInputStream(in));
-
-            for(int i = 0; i < this.size; ++i) {
-                try {
-                    byte[] res = new byte[16];
-                    inputStream.read(res);
-                    C.add(res);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-
-            }
-
+            start = System.nanoTime();
             byte[] z = secretKey.getD0();
             for(int i = 0; i < secretKey.getParameter().getSize(); ++i) {
                 if (!secretKey.isStar(i)) {
@@ -71,28 +60,25 @@ public class SHVEPredicateEngine
             }
             try {
                 AESUtil.decrypt(secretKey.getD1(), z);
-                return new byte[]{(byte)(1)};
+                res.add(new byte[]{1});
             } catch (RuntimeException e) {
-                return new byte[]{(byte)(0)};
+                res.add(new byte[]{0});
+            } finally {
+                end = System.nanoTime();
+                System.out.println(end - start);
             }
-
+           return res;
 
         } else if (inLen <= this.inBytes && inLen >= this.inBytes) {    // encryption
             SHVEEncryptionParameter encParams = (SHVEEncryptionParameter)this.key;
             SHVEMasterSecretKeyParameter pk = encParams.getMasterSecretKey();
-
-            ByteArrayOutputStream outputStream;
-            try {
-                outputStream = new ByteArrayOutputStream(this.getOutputBlockSize());
-                for (int i = 0; i < this.size; ++i) {
-                    int j = encParams.getAttributeAt(i);
-                    outputStream.write(AESUtil.encode(String.valueOf(j)
-                            .concat(String.valueOf(i)).getBytes(), pk.getMSK()));
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            C = new ArrayList<>();
+            for (int i = 0; i < this.size; ++i) {
+                int j = encParams.getAttributeAt(i);
+                C.add(AESUtil.encode(String.valueOf(j)
+                        .concat(String.valueOf(i)).getBytes(), pk.getMSK()));
             }
-            return outputStream.toByteArray();
+            return C;
         }
         return null;
     }

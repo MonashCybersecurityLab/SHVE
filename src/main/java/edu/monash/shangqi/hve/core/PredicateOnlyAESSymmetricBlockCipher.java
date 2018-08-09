@@ -1,5 +1,9 @@
 package edu.monash.shangqi.hve.core;
 
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class PredicateOnlyAESSymmetricBlockCipher
         extends AESSymmetricBlockCipher
         implements PredicateOnlyEncryptionScheme{
@@ -16,16 +20,16 @@ public abstract class PredicateOnlyAESSymmetricBlockCipher
         return this.forEncryption ? this.outBytes : 1;
     }
 
-    public byte[] process() {
-        return this.processBlock(new byte[0], 0, 0);
+    public List<byte[]> process() {
+        return this.processBlock(new ArrayList<>(1), 0, 0);
     }
 
-    public boolean evaluate(byte[] in, int inOff, int len) {
-        return this.processBlock(in, 0, len)[0] == 1;
+    public boolean evaluate(List<byte[]> in, int inOff, int len) {
+        return new BigInteger(this.processBlock(in, 0, in.size()).get(0)).intValue() == 1;
     }
 
-    public boolean evaluate(byte[] in) {
-        return this.processBlock(in, 0, in.length)[0] == 1;
+    public boolean evaluate(List<byte[]> in) {
+        return new BigInteger(this.processBlock(in, 0, in.size()).get(0)).intValue() == 1;
     }
 
 }

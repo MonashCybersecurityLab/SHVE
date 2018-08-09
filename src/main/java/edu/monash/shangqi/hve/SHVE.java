@@ -8,6 +8,7 @@ import edu.monash.shangqi.hve.param.*;
 import edu.monash.shangqi.hve.param.impl.*;
 import edu.monash.shangqi.hve.util.AESUtil;
 
+import java.util.List;
 import java.util.Random;
 
 public class SHVE {
@@ -37,14 +38,14 @@ public class SHVE {
 
 
 
-    public static byte[] enc(KeyParameter masterSecretKey, int... attributes) {
+    public static List<byte[]> enc(KeyParameter masterSecretKey, int... attributes) {
         SHVEPredicateEngine engine = new SHVEPredicateEngine();
         engine.init(true, new SHVEEncryptionParameter((SHVEMasterSecretKeyParameter) masterSecretKey, attributes));
         return engine.process();
     }
 
 
-    public static boolean evaluate(KeyParameter secretKey, byte[] ct) {
+    public static boolean evaluate(KeyParameter secretKey, List<byte[]> ct) {
         SHVEPredicateEngine engine = new SHVEPredicateEngine();
         engine.init(false, secretKey);
         return engine.evaluate(ct);
@@ -56,8 +57,8 @@ public class SHVE {
         Random random = new Random();
         for (int i = 0; i < size; i++) {
             if (i != 0  && i != 1 && random.nextBoolean()) {// it's a star
-                result[0][i] = -1;
-                result[1][i] = random.nextInt(2);
+                result[0][i] = random.nextInt(2);
+                result[1][i] = 1 - result[0][i];
             } else {
                 result[0][i] = random.nextInt(2);
                 result[1][i] = 1 - result[0][i];
@@ -67,7 +68,7 @@ public class SHVE {
     }
 
     public static void main(String[] args) {
-        long n = 100000;
+        long n = 10000;
         long start, end;
 
 
@@ -86,13 +87,11 @@ public class SHVE {
         System.out.println(end - start);
 
         start = System.nanoTime();
-        byte[] res = enc(MSK, vectors[1]);
+        List<byte[]> c = enc(MSK, vectors[1]);
         end = System.nanoTime();
         System.out.println(end - start);
 
-        start = System.nanoTime();
-        System.out.println(evaluate(sk, res));
-        end = System.nanoTime();
-        System.out.println(end - start);
+        System.out.print(evaluate(sk, c));
+
     }
 }
