@@ -18,9 +18,11 @@ import java.security.*;
  * </br>
  * version 0.2: Compare with Cong's version, I fix some warnings in
  * old version, and add essential comments for it.
+ * </br>
+ * version 0.3: Use BouncyCastle Crypto API.
  *
  * @author Cong, Shangqi
- * @version 0.2
+ * @version 0.3
  */
 public final class AESUtil {
 
@@ -53,7 +55,7 @@ public final class AESUtil {
     }
 
     /**
-     * Decrypt a cipher text by using AES decryption.
+     * Decrypt a ciphertext by using AES decryption.
      *
      * @param content the cipher text
      * @param password secret key of AES
@@ -77,7 +79,7 @@ public final class AESUtil {
     }
 
     /**
-     * Generate a AES-CMAC digest for verification.
+     * Generate a AES-CMAC digest.
      *
      * @param content the cipher text
      * @param password secret key of AES

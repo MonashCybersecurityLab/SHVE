@@ -7,15 +7,7 @@ import edu.monash.shangqi.hve.param.impl.SHVEMasterSecretKeyParameter;
 import edu.monash.shangqi.hve.param.impl.SHVESecretKeyParameter;
 import edu.monash.shangqi.hve.util.AESUtil;
 
-import javax.crypto.BadPaddingException;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.lang.reflect.Array;
-import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class SHVEPredicateEngine
@@ -40,14 +32,11 @@ public class SHVEPredicateEngine
     }
 
     public List<byte[]> process(List<byte[]> C, int inOff, int inLen) {
-
-        long start, end;
-
         if (this.key instanceof SHVESecretKeyParameter) {   // evaluation
             List<byte[]> res = new ArrayList<>();
             SHVESecretKeyParameter secretKey = (SHVESecretKeyParameter)this.key;
 
-            start = System.nanoTime();
+
             byte[] z = secretKey.getD0();
             for(int i = 0; i < secretKey.getParameter().getSize(); ++i) {
                 if (!secretKey.isStar(i)) {
@@ -62,23 +51,23 @@ public class SHVEPredicateEngine
                 AESUtil.decrypt(secretKey.getD1(), z);
                 res.add(new byte[]{1});
             } catch (RuntimeException e) {
+                // if the key is not correct, the given pattern is not matched
                 res.add(new byte[]{0});
-            } finally {
-                end = System.nanoTime();
-                System.out.println(end - start);
             }
            return res;
 
         } else if (inLen <= this.inBytes && inLen >= this.inBytes) {    // encryption
             SHVEEncryptionParameter encParams = (SHVEEncryptionParameter)this.key;
-            SHVEMasterSecretKeyParameter pk = encParams.getMasterSecretKey();
-            C = new ArrayList<>();
-            for (int i = 0; i < this.size; ++i) {
-                int j = encParams.getAttributeAt(i);
-                C.add(AESUtil.encode(String.valueOf(j)
-                        .concat(String.valueOf(i)).getBytes(), pk.getMSK()));
+            if(encParams.isMaster()) {
+                SHVEMasterSecretKeyParameter pk = encParams.getMasterSecretKey();
+                C = new ArrayList<>();
+                for (int i = 0; i < this.size; ++i) {
+                    int j = encParams.getAttributeAt(i);
+                    C.add(AESUtil.encode(String.valueOf(j)
+                            .concat(String.valueOf(i)).getBytes(), pk.getMSK()));
+                }
+                return C;
             }
-            return C;
         }
         return null;
     }

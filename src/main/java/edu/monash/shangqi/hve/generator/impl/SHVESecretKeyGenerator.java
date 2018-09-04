@@ -10,8 +10,6 @@ import edu.monash.shangqi.hve.util.AESUtil;
 import edu.monash.shangqi.hve.util.RandomUtil;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public final class SHVESecretKeyGenerator implements SecretKeyGenerator {
 
