@@ -4,6 +4,12 @@ import edu.monash.shangqi.hve.param.SHVEKeyParameter;
 
 import java.util.Arrays;
 
+/**
+ * The master secret key class, it keeps a 128-bit array
+ * and is marked as master key
+ *
+ * @author Shangqi
+ */
 public final class SHVEMasterSecretKeyParameter extends SHVEKeyParameter {
 
     private byte[] MSK;

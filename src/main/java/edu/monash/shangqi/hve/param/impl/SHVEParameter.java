@@ -2,6 +2,12 @@ package edu.monash.shangqi.hve.param.impl;
 
 import edu.monash.shangqi.hve.param.CipherParameter;
 
+/**
+ * The scheme parameter of SHVE, it indicates the length of
+ * attribute vector.
+ *
+ * @author Shangqi
+ */
 public final class SHVEParameter implements CipherParameter {
 
     private long attributeLengths;

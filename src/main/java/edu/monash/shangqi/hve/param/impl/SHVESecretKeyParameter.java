@@ -4,6 +4,9 @@ import edu.monash.shangqi.hve.param.SHVEKeyParameter;
 
 import java.util.Arrays;
 
+/**
+ * The secret key for a given
+ */
 public final class SHVESecretKeyParameter extends SHVEKeyParameter {
 
     private byte[] D0;
