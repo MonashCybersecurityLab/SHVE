@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 /**
  * The master secret key class, it keeps a 128-bit array
- * and is marked as master key
+ * and is marked as master key.
  *
  * @author Shangqi
  */

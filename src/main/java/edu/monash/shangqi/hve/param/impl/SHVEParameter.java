@@ -4,7 +4,7 @@ import edu.monash.shangqi.hve.param.CipherParameter;
 
 /**
  * The scheme parameter of SHVE, it indicates the length of
- * attribute vector.
+ * index/predicate vector.
  *
  * @author Shangqi
  */

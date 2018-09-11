@@ -5,7 +5,12 @@ import edu.monash.shangqi.hve.param.SHVEKeyParameter;
 import java.util.Arrays;
 
 /**
- * The secret key for a given
+ * The secret key for a given predicate vector.
+ * B: non-wildcard position
+ * D0: Masked secret key
+ * D1: Encrypted 0
+ *
+ * @author Shangqi
  */
 public final class SHVESecretKeyParameter extends SHVEKeyParameter {
 

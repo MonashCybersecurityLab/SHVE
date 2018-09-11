@@ -2,15 +2,18 @@ package edu.monash.shangqi.hve.param;
 
 import edu.monash.shangqi.hve.util.RandomUtil;
 
+/**
+ * The parameter for key generator. It keeps the length
+ * of key (depends on security parameter and the type of the key).
+ * We use AES-128, so the length is 128 bits if it is the msk.
+ *
+ * @author Shangqi
+ */
 public class KeyGenerationParameter {
 
-    private int keyLength;
+    public int keyLength;
 
     public KeyGenerationParameter(int keyLength) {
         this.keyLength = keyLength;
-    }
-
-    public byte[] getRandom() {
-        return RandomUtil.getRandom(this.keyLength - 1);
     }
 }

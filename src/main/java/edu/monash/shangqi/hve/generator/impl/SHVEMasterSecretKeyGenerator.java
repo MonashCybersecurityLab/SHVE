@@ -6,6 +6,7 @@ import edu.monash.shangqi.hve.param.KeyParameter;
 import edu.monash.shangqi.hve.param.impl.SHVEMasterSecretKeyGenerationParameter;
 import edu.monash.shangqi.hve.param.impl.SHVEMasterSecretKeyParameter;
 import edu.monash.shangqi.hve.param.impl.SHVEParameter;
+import edu.monash.shangqi.hve.util.RandomUtil;
 
 public final class SHVEMasterSecretKeyGenerator implements SecretKeyGenerator {
 
@@ -20,7 +21,7 @@ public final class SHVEMasterSecretKeyGenerator implements SecretKeyGenerator {
 
     public KeyParameter generateKey() {
         SHVEParameter parameter = this.keyParameter.getParameter();
-        byte[] MSK = this.keyParameter.getRandom();
+        byte[] MSK = RandomUtil.getRandom(keyParameter.keyLength - 1);
 
         return new SHVEMasterSecretKeyParameter(parameter, MSK);
     }

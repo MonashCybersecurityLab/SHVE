@@ -16,7 +16,7 @@ public class SHVE {
     public SHVE() {}
 
     // Generate the master secret key (MSK)
-    public static KeyParameter setup(long size) {
+    private static KeyParameter setup(long size) {
         SHVEMasterSecretKeyGenerator generator = new SHVEMasterSecretKeyGenerator();
         generator.init(new SHVEMasterSecretKeyGenerationParameter(genBinaryParam(size)));
 
@@ -32,7 +32,7 @@ public class SHVE {
     }
 
     // Use MSK and a given pattern to generate query token (sk)
-    public static KeyParameter keyGen(KeyParameter masterSecretKey, int... pattern) {
+    private static KeyParameter keyGen(KeyParameter masterSecretKey, int... pattern) {
         SHVESecretKeyGenerator generator = new SHVESecretKeyGenerator();
         generator.init(new SHVESecretKeyGenerationParameter((SHVEMasterSecretKeyParameter) masterSecretKey, pattern));
 
@@ -40,14 +40,14 @@ public class SHVE {
     }
 
     // Use MSK to encrypt an attribute vector and get HVE ciphertext (c)
-    public static List<byte[]> enc(KeyParameter masterSecretKey, int... attributes) {
+    private static List<byte[]> enc(KeyParameter masterSecretKey, int... attributes) {
         SHVEPredicateEngine engine = new SHVEPredicateEngine();
         engine.init(true, new SHVEEncryptionParameter((SHVEMasterSecretKeyParameter) masterSecretKey, attributes));
         return engine.process();
     }
 
     // Use sk to check whether the pattern is in c
-    public static boolean evaluate(KeyParameter secretKey, List<byte[]> ct) {
+    private static boolean evaluate(KeyParameter secretKey, List<byte[]> ct) {
         SHVEPredicateEngine engine = new SHVEPredicateEngine();
         engine.init(false, secretKey);
         return engine.evaluate(ct);
