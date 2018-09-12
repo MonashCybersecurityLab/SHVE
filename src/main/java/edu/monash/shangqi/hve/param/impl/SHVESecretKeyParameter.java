@@ -23,7 +23,6 @@ public final class SHVESecretKeyParameter extends SHVEKeyParameter {
         super(false, parameter);
         this.D0 = Arrays.copyOf(D0, D0.length);
         this.D1 = Arrays.copyOf(D1, D1.length);
-        // add non-wildcard positions in S
         this.S = Arrays.copyOf(S, S.length);
     }
 
