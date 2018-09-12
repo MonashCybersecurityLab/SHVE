@@ -70,7 +70,7 @@ public class SHVE {
     }
 
     public static void main(String[] args) {
-        long n = 10000000;
+        long n = 10000;
         long start, end;
 
         KeyParameter MSK = setup(n);

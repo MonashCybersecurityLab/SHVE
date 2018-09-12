@@ -8,6 +8,12 @@ import edu.monash.shangqi.hve.param.impl.SHVEMasterSecretKeyParameter;
 import edu.monash.shangqi.hve.param.impl.SHVEParameter;
 import edu.monash.shangqi.hve.util.RandomUtil;
 
+/**
+ * Master secret key (msk) generator uses the msk generation parameter
+ * to generate msk.
+ *
+ * @author Shangqi
+ */
 public final class SHVEMasterSecretKeyGenerator implements SecretKeyGenerator {
 
     private SHVEMasterSecretKeyGenerationParameter keyParameter;
@@ -19,6 +25,7 @@ public final class SHVEMasterSecretKeyGenerator implements SecretKeyGenerator {
         this.keyParameter = (SHVEMasterSecretKeyGenerationParameter) parameter;
     }
 
+    // generate a key with the given security parameter
     public KeyParameter generateKey() {
         SHVEParameter parameter = this.keyParameter.getParameter();
         byte[] MSK = RandomUtil.getRandom(keyParameter.keyLength - 1);

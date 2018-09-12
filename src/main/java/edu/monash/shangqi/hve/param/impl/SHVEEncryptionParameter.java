@@ -7,6 +7,8 @@ import java.util.Arrays;
 /**
  * The parameter for SHVE Encryption algorithm,
  * it combines the msk and index vector.
+ *
+ * @author Shangqi
  */
 public class SHVEEncryptionParameter extends SHVEKeyParameter {
 
