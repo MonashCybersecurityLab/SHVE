@@ -10,8 +10,6 @@ import edu.monash.shangqi.hve.util.AESUtil;
 import edu.monash.shangqi.hve.util.RandomUtil;
 
 import java.math.BigInteger;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Secret key (sk) generator uses msk and a predicate vector

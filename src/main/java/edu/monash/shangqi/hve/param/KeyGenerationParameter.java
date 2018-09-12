@@ -1,7 +1,5 @@
 package edu.monash.shangqi.hve.param;
 
-import edu.monash.shangqi.hve.util.RandomUtil;
-
 /**
  * The parameter for key generator. It keeps the length
  * of key (depends on security parameter and the type of the key).
