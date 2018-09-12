@@ -4,6 +4,12 @@ import edu.monash.shangqi.hve.param.CipherParameter;
 
 import java.util.List;
 
+/**
+ * Instance of Symmetric block cipher, the corresponding block cipher scheme
+ * is AES (has 128 bits key, and process on 128 bits block)
+ *
+ * @author Shangqi
+ */
 public abstract class AESSymmetricBlockCipher implements SymmetricBlockCipher {
 
     protected boolean forEncryption;
