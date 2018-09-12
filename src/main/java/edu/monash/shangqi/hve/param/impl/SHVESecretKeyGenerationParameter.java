@@ -4,12 +4,24 @@ import edu.monash.shangqi.hve.param.KeyGenerationParameter;
 
 import java.util.Arrays;
 
+/**
+ * The generator parameter of sk, it use the msk
+ * and a given predicate vector to generate a tuple of
+ * three elements (S, d0, d1).
+ *
+ * @author Shangqi
+ */
 public final class SHVESecretKeyGenerationParameter extends KeyGenerationParameter {
 
+    // The master secret key
     private SHVEMasterSecretKeyParameter masterSecretKey;
+
+    // Predicate vector
     private int[] pattern;
 
     public SHVESecretKeyGenerationParameter(SHVEMasterSecretKeyParameter masterSecretKey, int... pattern) {
+        // The key length is invalid for sk, as it is a tuple
+        // instead of a block key.
         super(-1);
         this.masterSecretKey = masterSecretKey;
         this.pattern = Arrays.copyOf(pattern, pattern.length);
@@ -23,8 +35,9 @@ public final class SHVESecretKeyGenerationParameter extends KeyGenerationParamet
         return Arrays.copyOf(this.pattern, this.pattern.length);
     }
 
+    // Check the wildcard element
     public boolean isStarAt(int index) {
-        return this.pattern[index] < 0;
+        return getPatternAt(index) < 0;
     }
 
     public int getPatternAt(int index) {

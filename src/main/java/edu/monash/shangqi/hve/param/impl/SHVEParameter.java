@@ -10,6 +10,7 @@ import edu.monash.shangqi.hve.param.CipherParameter;
  */
 public final class SHVEParameter implements CipherParameter {
 
+    // length of index/predicate vector
     private long attributeLengths;
 
     public SHVEParameter(long attributeLengths) {

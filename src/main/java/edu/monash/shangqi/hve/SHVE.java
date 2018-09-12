@@ -39,7 +39,7 @@ public class SHVE {
         return generator.generateKey();
     }
 
-    // Use MSK to encrypt an attribute vector and get HVE ciphertext (c)
+    // Use MSK to encrypt an index vector and get HVE ciphertext (c)
     private static List<byte[]> enc(KeyParameter masterSecretKey, int... attributes) {
         SHVEPredicateEngine engine = new SHVEPredicateEngine();
         engine.init(true, new SHVEEncryptionParameter((SHVEMasterSecretKeyParameter) masterSecretKey, attributes));
@@ -70,7 +70,7 @@ public class SHVE {
     }
 
     public static void main(String[] args) {
-        long n = 10000;
+        long n = 10000000;
         long start, end;
 
         KeyParameter MSK = setup(n);
@@ -80,7 +80,7 @@ public class SHVE {
         AESUtil.encode("test".getBytes(), ((SHVEMasterSecretKeyParameter) MSK).getMSK());
 
         // This is used to test the case when pattern is matched with attributes
-        //int[][] vectors = {{1,1,-1,0,1},{1,1,0,0,1}};
+        //[][] vectors = {{1,1,-1,0,1},{1,1,0,0,1}};
         int[][] vectors = createNonMatchingVectors(n);
 
         start = System.nanoTime();

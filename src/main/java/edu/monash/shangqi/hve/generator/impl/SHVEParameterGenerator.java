@@ -2,7 +2,7 @@ package edu.monash.shangqi.hve.generator.impl;
 
 import edu.monash.shangqi.hve.param.impl.SHVEParameter;
 
-public class SHVEParameterGenerator {
+public final class SHVEParameterGenerator {
 
     private long attributeLengths;
 

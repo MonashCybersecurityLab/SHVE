@@ -10,6 +10,8 @@ import edu.monash.shangqi.hve.util.AESUtil;
 import edu.monash.shangqi.hve.util.RandomUtil;
 
 import java.math.BigInteger;
+import java.util.HashSet;
+import java.util.Set;
 
 public final class SHVESecretKeyGenerator implements SecretKeyGenerator {
 
@@ -34,14 +36,12 @@ public final class SHVESecretKeyGenerator implements SecretKeyGenerator {
     public KeyParameter generateKey() {
         SHVEMasterSecretKeyParameter masterSecretKey = this.parameter.getMasterSecretKey();
         long size = masterSecretKey.getParameter().getSize();
-        int[] B = new int[(int)size];
+        Set<Integer> S = new HashSet<>();
         byte[] D0 = new byte[16];
 
         for(int i = 0; i < size; ++i) {
-
-            if (this.parameter.isStarAt(i)) {
-                B[i] = 1;
-            } else {
+            if (!this.parameter.isStarAt(i)) {
+                S.add(i);
                 byte[] d = AESUtil.encode(String.valueOf(this.parameter.getPatternAt(i))
                                 .concat(String.valueOf(i)).getBytes(), masterSecretKey.getMSK());
 
@@ -58,6 +58,6 @@ public final class SHVESecretKeyGenerator implements SecretKeyGenerator {
             D0[i] ^= K[i];
         }
 
-        return new SHVESecretKeyParameter(masterSecretKey.getParameter(), D0, D1, B);
+        return new SHVESecretKeyParameter(masterSecretKey.getParameter(), D0, D1, S);
     }
 }

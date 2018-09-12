@@ -4,8 +4,8 @@ import edu.monash.shangqi.hve.param.impl.SHVEParameter;
 
 /**
  * Key parameter of SHVE scheme. Depending on the type of the key (msk or sk),
- * it keeps the length of the attribute or predicate vector.
- * (msk--attribute; sk--predicate)
+ * it keeps the length of the index or predicate vector.
+ * (msk--index; sk--predicate)
  *
  * @author Shangqi
  */

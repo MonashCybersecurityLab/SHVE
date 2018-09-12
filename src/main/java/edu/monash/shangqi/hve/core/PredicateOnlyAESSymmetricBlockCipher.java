@@ -6,7 +6,7 @@ import java.util.List;
 
 public abstract class PredicateOnlyAESSymmetricBlockCipher
         extends AESSymmetricBlockCipher
-        implements PredicateOnlyEncryptionScheme{
+        implements PredicateOnlyEncryptionScheme {
 
     protected PredicateOnlyAESSymmetricBlockCipher() {}
 

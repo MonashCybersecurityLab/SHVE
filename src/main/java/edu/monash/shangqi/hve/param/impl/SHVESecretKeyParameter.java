@@ -2,35 +2,34 @@ package edu.monash.shangqi.hve.param.impl;
 
 import edu.monash.shangqi.hve.param.SHVEKeyParameter;
 
-import java.util.Arrays;
+import java.util.*;
 
 /**
- * The secret key for a given predicate vector.
- * B: non-wildcard position
+ * The secret key (sk) for a given predicate vector.
  * D0: Masked secret key
- * D1: Encrypted 0
+ * D1: Encrypted "0"
+ * S: non-wildcard position
  *
  * @author Shangqi
  */
 public final class SHVESecretKeyParameter extends SHVEKeyParameter {
 
+    // Tuple of sk
     private byte[] D0;
     private byte[] D1;
-    private int[] B;
+    private Set<Integer> S;
 
-    public SHVESecretKeyParameter(SHVEParameter parameter, byte[] D0, byte[] D1, int[] B) {
+    public SHVESecretKeyParameter(SHVEParameter parameter, byte[] D0, byte[] D1, Set<Integer> B) {
         super(false, parameter);
         this.D0 = Arrays.copyOf(D0, D0.length);
         this.D1 = Arrays.copyOf(D1, D1.length);
-        this.B = Arrays.copyOf(B, B.length);
+        // add non-wildcard positions in S
+        this.S = new HashSet<>();
+        this.S.addAll(B);
     }
 
     public boolean isStar(int index) {
-        return this.getBAt(index) == 1;
-    }
-
-    public int getBAt(int index) {
-        return this.B[index];
+        return !S.add(index);
     }
 
     public byte[] getD0() {
@@ -41,7 +40,7 @@ public final class SHVESecretKeyParameter extends SHVEKeyParameter {
         return Arrays.copyOf(this.D1, this.D1.length);
     }
 
-    public int[] getBs() {
-        return Arrays.copyOf(this.B, this.B.length);
+    public Set<Integer> getS() {
+        return this.S;
     }
 }

@@ -2,6 +2,12 @@ package edu.monash.shangqi.hve.param.impl;
 
 import edu.monash.shangqi.hve.param.KeyGenerationParameter;
 
+/**
+ * The generator parameter of msk. It includes the length of index vector.
+ * As we use AES-128, the key length is fixed. (i.e. 128 bits/16 bytes).
+ *
+ * @author Shangqi
+ */
 public class SHVEMasterSecretKeyGenerationParameter extends KeyGenerationParameter {
     private SHVEParameter parameter;
 

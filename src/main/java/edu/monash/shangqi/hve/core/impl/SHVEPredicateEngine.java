@@ -36,8 +36,15 @@ public class SHVEPredicateEngine
             List<byte[]> res = new ArrayList<>();
             SHVESecretKeyParameter secretKey = (SHVESecretKeyParameter)this.key;
 
-
             byte[] z = secretKey.getD0();
+            for(Integer i : secretKey.getS()) {
+                byte[] c = C.get(i);
+                // use xor to predicate
+                for (int j = 0; j < z.length; j++) {
+                    z[j] ^= c[j];
+                }
+            }
+            /*
             for(int i = 0; i < secretKey.getParameter().getSize(); ++i) {
                 if (!secretKey.isStar(i)) {
                     byte[] c = C.get(i);
@@ -46,7 +53,7 @@ public class SHVEPredicateEngine
                         z[j] ^= c[j];
                     }
                 }
-            }
+            }*/
             try {
                 AESUtil.decrypt(secretKey.getD1(), z);
                 res.add(new byte[]{1});
