@@ -4,6 +4,12 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Instance of predicate only engine which is
+ * based on AES-128.
+ *
+ * @author Shangqi
+ */
 public abstract class PredicateOnlyAESSymmetricBlockCipher
         extends AESSymmetricBlockCipher
         implements PredicateOnlyEncryptionScheme {
@@ -20,6 +26,7 @@ public abstract class PredicateOnlyAESSymmetricBlockCipher
         return this.forEncryption ? this.outBytes : 1;
     }
 
+    // process the block by using AES-128
     public List<byte[]> process() {
         return this.processBlock(new ArrayList<>(1), 0, 0);
     }
