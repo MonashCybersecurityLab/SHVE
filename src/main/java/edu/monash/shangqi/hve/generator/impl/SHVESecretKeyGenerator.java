@@ -12,7 +12,7 @@ import edu.monash.shangqi.hve.util.RandomUtil;
 import java.math.BigInteger;
 
 /**
- * Secret key (sk) generator uses msk and a predicate vector
+ * Secret key (sk) generator uses the msk and a predicate vector
  * to generate the sk.
  *
  * @author Shangqi
@@ -64,7 +64,8 @@ public final class SHVESecretKeyGenerator implements SecretKeyGenerator {
         // use K to encrypt "0"
         byte[] D1 = AESUtil.encrypt(BigInteger.valueOf(0).toByteArray(), K);
         for(int i = 0; i < D0.length; i++) {
-            D0[i] ^= K[i];  // mask the K by D0
+            // mask the K by above mask
+            D0[i] ^= K[i];
         }
 
         return new SHVESecretKeyParameter(masterSecretKey.getParameter(), D0, D1, S);

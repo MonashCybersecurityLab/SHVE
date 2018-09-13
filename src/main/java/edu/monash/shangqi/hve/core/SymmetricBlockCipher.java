@@ -5,19 +5,14 @@ import edu.monash.shangqi.hve.param.CipherParameter;
 import java.util.List;
 
 /**
- * The abstraction for symmetric block cipher, it operates
- * on the fixed size block of bits.
+ * The abstraction for symmetric block cipher, it uses
+ * a symmetric key to initialise {@link #init(boolean, CipherParameter)}
+ * and operates on the fixed size block of bits {@link #processBlock(List, int, int)}.
  *
  * @author Shangqi
  */
 public interface SymmetricBlockCipher {
 
-    /**
-     * Initialise the encryption scheme.
-     *
-     * @param forEncryption indicate whether it is initialise for enc or dec
-     * @param parameter the key
-     */
     void init(boolean forEncryption, CipherParameter parameter);
 
     int getInputBlockSize();

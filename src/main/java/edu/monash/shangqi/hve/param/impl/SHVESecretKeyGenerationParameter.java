@@ -5,7 +5,7 @@ import edu.monash.shangqi.hve.param.KeyGenerationParameter;
 import java.util.Arrays;
 
 /**
- * The generator parameter of sk, it use the msk
+ * The generator parameter of sk, it uses the msk
  * and a given predicate vector to generate a tuple of
  * three elements (S, d0, d1).
  *

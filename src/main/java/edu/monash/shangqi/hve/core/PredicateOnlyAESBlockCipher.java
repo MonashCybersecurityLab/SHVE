@@ -30,9 +30,7 @@ public abstract class PredicateOnlyAESBlockCipher
         return this.forEncryption ? this.outBytes : 1;
     }
 
-    /**
-     * The predicate only engine inputs empty message (only one possible message "True")
-     */
+    // The predicate only engine inputs empty message (only one possible message "True")
     public List<byte[]> process() {
         return this.processBlock(new ArrayList<>(), 0, 0);
     }

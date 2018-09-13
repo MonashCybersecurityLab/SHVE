@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Predicate only engine of SHVE.
+ * The predicate only engine of SHVE.
  *
  * @author Shangqi
  */
@@ -43,7 +43,8 @@ public class SHVEPredicateEngine
 
             byte[] z = secretKey.getD0();
             for(int i = 0; i < secretKey.getParameter().getSize(); ++i) {
-                if (!secretKey.isStar(i)) { // XoR all PRF in non-wildcard position of ciphertext
+                if (!secretKey.isStar(i)) {
+                    // XoR all PRF values in non-wildcard positions of the ciphertext
                     byte[] c = C.get(i);
                     // use xor to remove the mask of K
                     for (int j = 0; j < z.length; j++) {
@@ -56,17 +57,19 @@ public class SHVEPredicateEngine
                 AESUtil.decrypt(secretKey.getD1(), z);
                 res.add(new byte[]{1});
             } catch (RuntimeException e) {
-                // if the key is not correct, the given pattern is not matched
+                // if K' is not correct, the given pattern is not matched
                 res.add(new byte[]{0});
             }
            return res;
 
         } else if (inLen == this.getInputBlockSize()) {    // encryption
             SHVEEncryptionParameter encParams = (SHVEEncryptionParameter)this.key;
-            if(encParams.isMaster()) {  // only can use the msk to encrypt
+            if(encParams.isMaster()) {
+                // only can use the msk to encrypt
                 SHVEMasterSecretKeyParameter pk = encParams.getMasterSecretKey();
                 C = new ArrayList<>();
-                for (int i = 0; i < this.size; ++i) {   // create the ciphertext as an array of PRF
+                for (int i = 0; i < this.size; ++i) {
+                    // create the ciphertext as an array of PRF values
                     int j = encParams.getAttributeAt(i);
                     C.add(AESUtil.encode(String.valueOf(j)
                             .concat(String.valueOf(i)).getBytes(), pk.getMSK()));

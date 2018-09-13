@@ -19,7 +19,8 @@ import java.security.*;
  * version 0.2: Compare with Cong's version, I fix some warnings in
  * old version, and add essential comments for it.
  * </br>
- * version 0.3: Use BouncyCastle Crypto API.
+ * version 0.3: Use BouncyCastle Crypto API, add a PRF implementation
+ * based on AES-CMAC.
  *
  * @author Cong, Shangqi
  * @version 0.3

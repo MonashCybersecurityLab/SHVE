@@ -11,7 +11,7 @@ public class KeyParameter implements CipherParameter {
 
     private boolean masterKey;
 
-    public KeyParameter(boolean masterKey) {
+    KeyParameter(boolean masterKey) {
         this.masterKey = masterKey;
     }
 

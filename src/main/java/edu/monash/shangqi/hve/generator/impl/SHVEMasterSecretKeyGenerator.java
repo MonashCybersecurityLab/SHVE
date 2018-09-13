@@ -10,7 +10,7 @@ import edu.monash.shangqi.hve.util.RandomUtil;
 
 /**
  * Master secret key (msk) generator uses the msk generation parameter
- * to generate msk.
+ * to generate a msk.
  *
  * @author Shangqi
  */

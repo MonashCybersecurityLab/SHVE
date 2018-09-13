@@ -3,7 +3,7 @@ package edu.monash.shangqi.hve.core;
 import java.util.List;
 
 /**
- * The abstraction of predicate only engine upon symmetric
+ * The abstraction of the predicate only engine upon symmetric
  * block cipher.
  *
  * @author Shangqi
