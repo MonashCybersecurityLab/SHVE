@@ -1,6 +1,6 @@
 package edu.monash.shangqi.hve.core.impl;
 
-import edu.monash.shangqi.hve.core.PredicateOnlyAESSymmetricBlockCipher;
+import edu.monash.shangqi.hve.core.PredicateOnlyAESBlockCipher;
 import edu.monash.shangqi.hve.param.SHVEKeyParameter;
 import edu.monash.shangqi.hve.param.impl.SHVEEncryptionParameter;
 import edu.monash.shangqi.hve.param.impl.SHVEMasterSecretKeyParameter;
@@ -10,8 +10,13 @@ import edu.monash.shangqi.hve.util.AESUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Predicate only engine of SHVE.
+ *
+ * @author Shangqi
+ */
 public class SHVEPredicateEngine
-        extends PredicateOnlyAESSymmetricBlockCipher {
+        extends PredicateOnlyAESBlockCipher {
 
     private long size;
 
@@ -38,15 +43,16 @@ public class SHVEPredicateEngine
 
             byte[] z = secretKey.getD0();
             for(int i = 0; i < secretKey.getParameter().getSize(); ++i) {
-                if (!secretKey.isStar(i)) {
+                if (!secretKey.isStar(i)) { // XoR all PRF in non-wildcard position of ciphertext
                     byte[] c = C.get(i);
-                    // use xor to predicate
+                    // use xor to remove the mask of K
                     for (int j = 0; j < z.length; j++) {
                         z[j] ^= c[j];
                     }
                 }
             }
             try {
+                // use the recovered K' to decrypt D1
                 AESUtil.decrypt(secretKey.getD1(), z);
                 res.add(new byte[]{1});
             } catch (RuntimeException e) {
@@ -55,12 +61,12 @@ public class SHVEPredicateEngine
             }
            return res;
 
-        } else if (inLen <= this.inBytes && inLen >= this.inBytes) {    // encryption
+        } else if (inLen == this.inBytes) {    // encryption
             SHVEEncryptionParameter encParams = (SHVEEncryptionParameter)this.key;
-            if(encParams.isMaster()) {
+            if(encParams.isMaster()) {  // only can use the msk to encrypt
                 SHVEMasterSecretKeyParameter pk = encParams.getMasterSecretKey();
                 C = new ArrayList<>();
-                for (int i = 0; i < this.size; ++i) {
+                for (int i = 0; i < this.size; ++i) {   // create the ciphertext as an array of PRF
                     int j = encParams.getAttributeAt(i);
                     C.add(AESUtil.encode(String.valueOf(j)
                             .concat(String.valueOf(i)).getBytes(), pk.getMSK()));

@@ -10,11 +10,15 @@ import java.util.List;
  *
  * @author Shangqi
  */
-public abstract class PredicateOnlyAESSymmetricBlockCipher
-        extends AESSymmetricBlockCipher
+public abstract class PredicateOnlyAESBlockCipher
+        extends AESBlockCipher
         implements PredicateOnlyEncryptionScheme {
 
-    protected PredicateOnlyAESSymmetricBlockCipher() {}
+    protected PredicateOnlyAESBlockCipher() {
+        // set the input/output bytes to 0 for predicate only engine
+        this.inBytes = 0;
+        this.outBytes = 0;
+    }
 
     @Override
     public int getInputBlockSize() {
@@ -26,9 +30,11 @@ public abstract class PredicateOnlyAESSymmetricBlockCipher
         return this.forEncryption ? this.outBytes : 1;
     }
 
-    // process the block by using AES-128
+    /**
+     * The predicate only engine inputs empty message (only one possible message "True")
+     */
     public List<byte[]> process() {
-        return this.processBlock(new ArrayList<>(1), 0, 0);
+        return this.processBlock(new ArrayList<>(), 0, 0);
     }
 
     public boolean evaluate(List<byte[]> in, int inOff, int len) {

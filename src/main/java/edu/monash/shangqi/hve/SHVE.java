@@ -70,7 +70,7 @@ public class SHVE {
     }
 
     public static void main(String[] args) {
-        long n = 10000;
+        long n = 5000;  // change n to test different size of vectors
         long start, end;
 
         KeyParameter MSK = setup(n);
@@ -80,7 +80,8 @@ public class SHVE {
         AESUtil.encode("test".getBytes(), ((SHVEMasterSecretKeyParameter) MSK).getMSK());
 
         // This is used to test the case when pattern is matched with attributes
-        //[][] vectors = {{1,1,-1,0,1},{1,1,0,0,1}};
+        //int[][] vectors = {{1,1,-1,0,1},{1,1,0,0,1}};
+        // Generate two unmatched vectors without wildcard elements
         int[][] vectors = createNonMatchingVectors(n);
 
         start = System.nanoTime();

@@ -6,18 +6,18 @@ import java.util.List;
 
 /**
  * Instance of Symmetric block cipher, the corresponding block cipher scheme
- * is AES (has 128 bits key, and process on 128 bits block)
+ * is AES (has 128 bits key, and process on 128 bits block).
  *
  * @author Shangqi
  */
-public abstract class AESSymmetricBlockCipher implements SymmetricBlockCipher {
+public abstract class AESBlockCipher implements SymmetricBlockCipher {
 
     protected boolean forEncryption;
     protected CipherParameter key;
-    protected int inBytes = 0;
-    protected int outBytes = 0;
+    protected int inBytes = 16;
+    int outBytes = 16;
 
-    protected AESSymmetricBlockCipher() {}
+    AESBlockCipher() {}
 
     public int getInputBlockSize() {
         return this.forEncryption ? this.inBytes : this.outBytes;
