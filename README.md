@@ -22,7 +22,7 @@ That's all for the building process. You can include the java package in your pr
 
 ## Usage
 
-To see the example, please check the main function of **edu.monash.shangqi.hve.SHVE** in the package.
+To see the example, please check the main function of **edu.monash.crypto.hve.SHVE** in the package.
 
 The provided APIs capture the four basic operations (`setup`, `keyGen`, `Enc`, `Query`) for the HVE scheme with some modification. Specifically, the implementation is for the predicate-only construction, which means the message for `Enc` is always "True".
 
