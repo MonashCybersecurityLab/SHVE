@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>edu.monash.shangqi</groupId>
+    <groupId>edu.monash.crypto</groupId>
     <artifactId>shve</artifactId>
     <version>1.0</version>
 
@@ -40,7 +40,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>edu.monash.shangqi.hve.SHVE</mainClass>
+                            <mainClass>edu.monash.crypto.hve.SHVE</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

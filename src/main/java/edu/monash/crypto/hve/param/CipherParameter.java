@@ -1,4 +1,4 @@
-package edu.monash.shangqi.hve.param;
+package edu.monash.crypto.hve.param;
 
 public interface CipherParameter {
 }

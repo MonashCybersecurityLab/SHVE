@@ -1,12 +1,12 @@
-package edu.monash.shangqi.hve;
+package edu.monash.crypto.hve;
 
-import edu.monash.shangqi.hve.core.impl.SHVEPredicateEngine;
-import edu.monash.shangqi.hve.generator.impl.SHVEMasterSecretKeyGenerator;
-import edu.monash.shangqi.hve.generator.impl.SHVEParameterGenerator;
-import edu.monash.shangqi.hve.generator.impl.SHVESecretKeyGenerator;
-import edu.monash.shangqi.hve.param.*;
-import edu.monash.shangqi.hve.param.impl.*;
-import edu.monash.shangqi.hve.util.AESUtil;
+import edu.monash.crypto.hve.core.impl.SHVEPredicateEngine;
+import edu.monash.crypto.hve.generator.impl.SHVEMasterSecretKeyGenerator;
+import edu.monash.crypto.hve.generator.impl.SHVEParameterGenerator;
+import edu.monash.crypto.hve.generator.impl.SHVESecretKeyGenerator;
+import edu.monash.crypto.hve.param.KeyParameter;
+import edu.monash.crypto.hve.param.impl.*;
+import edu.monash.crypto.hve.util.AESUtil;
 
 import java.util.List;
 import java.util.Random;

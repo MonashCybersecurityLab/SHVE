@@ -1,6 +1,6 @@
-package edu.monash.shangqi.hve.generator.impl;
+package edu.monash.crypto.hve.generator.impl;
 
-import edu.monash.shangqi.hve.param.impl.SHVEParameter;
+import edu.monash.crypto.hve.param.impl.SHVEParameter;
 
 /**
  * Generator for SHVE parameter, it translates the field size and # of

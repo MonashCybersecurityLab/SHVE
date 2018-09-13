@@ -1,6 +1,6 @@
-package edu.monash.shangqi.hve.param;
+package edu.monash.crypto.hve.param;
 
-import edu.monash.shangqi.hve.param.impl.SHVEParameter;
+import edu.monash.crypto.hve.param.impl.SHVEParameter;
 
 /**
  * Key parameter of SHVE scheme. Depending on the type of the key (msk or sk),

@@ -1,12 +1,12 @@
-package edu.monash.shangqi.hve.generator.impl;
+package edu.monash.crypto.hve.generator.impl;
 
-import edu.monash.shangqi.hve.generator.SecretKeyGenerator;
-import edu.monash.shangqi.hve.param.KeyGenerationParameter;
-import edu.monash.shangqi.hve.param.KeyParameter;
-import edu.monash.shangqi.hve.param.impl.SHVEMasterSecretKeyGenerationParameter;
-import edu.monash.shangqi.hve.param.impl.SHVEMasterSecretKeyParameter;
-import edu.monash.shangqi.hve.param.impl.SHVEParameter;
-import edu.monash.shangqi.hve.util.RandomUtil;
+import edu.monash.crypto.hve.generator.SecretKeyGenerator;
+import edu.monash.crypto.hve.param.KeyGenerationParameter;
+import edu.monash.crypto.hve.param.KeyParameter;
+import edu.monash.crypto.hve.param.impl.SHVEMasterSecretKeyGenerationParameter;
+import edu.monash.crypto.hve.param.impl.SHVEMasterSecretKeyParameter;
+import edu.monash.crypto.hve.param.impl.SHVEParameter;
+import edu.monash.crypto.hve.util.RandomUtil;
 
 /**
  * Master secret key (msk) generator uses the msk generation parameter

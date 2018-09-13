@@ -1,4 +1,4 @@
-package edu.monash.shangqi.hve.core;
+package edu.monash.crypto.hve.core;
 
 import java.util.List;
 

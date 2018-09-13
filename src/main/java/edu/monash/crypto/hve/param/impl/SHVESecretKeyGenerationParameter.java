@@ -1,6 +1,6 @@
-package edu.monash.shangqi.hve.param.impl;
+package edu.monash.crypto.hve.param.impl;
 
-import edu.monash.shangqi.hve.param.KeyGenerationParameter;
+import edu.monash.crypto.hve.param.KeyGenerationParameter;
 
 import java.util.Arrays;
 

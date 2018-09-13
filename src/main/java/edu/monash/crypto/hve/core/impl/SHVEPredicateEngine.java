@@ -1,11 +1,11 @@
-package edu.monash.shangqi.hve.core.impl;
+package edu.monash.crypto.hve.core.impl;
 
-import edu.monash.shangqi.hve.core.PredicateOnlyAESBlockCipher;
-import edu.monash.shangqi.hve.param.SHVEKeyParameter;
-import edu.monash.shangqi.hve.param.impl.SHVEEncryptionParameter;
-import edu.monash.shangqi.hve.param.impl.SHVEMasterSecretKeyParameter;
-import edu.monash.shangqi.hve.param.impl.SHVESecretKeyParameter;
-import edu.monash.shangqi.hve.util.AESUtil;
+import edu.monash.crypto.hve.core.PredicateOnlyAESBlockCipher;
+import edu.monash.crypto.hve.param.SHVEKeyParameter;
+import edu.monash.crypto.hve.param.impl.SHVEEncryptionParameter;
+import edu.monash.crypto.hve.param.impl.SHVEMasterSecretKeyParameter;
+import edu.monash.crypto.hve.param.impl.SHVESecretKeyParameter;
+import edu.monash.crypto.hve.util.AESUtil;
 
 import java.util.ArrayList;
 import java.util.List;

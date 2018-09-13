@@ -1,6 +1,6 @@
-package edu.monash.shangqi.hve.param.impl;
+package edu.monash.crypto.hve.param.impl;
 
-import edu.monash.shangqi.hve.param.KeyGenerationParameter;
+import edu.monash.crypto.hve.param.KeyGenerationParameter;
 
 /**
  * The generator parameter of msk. It includes the length of index vector.

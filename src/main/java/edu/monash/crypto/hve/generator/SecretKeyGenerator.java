@@ -1,7 +1,7 @@
-package edu.monash.shangqi.hve.generator;
+package edu.monash.crypto.hve.generator;
 
-import edu.monash.shangqi.hve.param.KeyGenerationParameter;
-import edu.monash.shangqi.hve.param.KeyParameter;
+import edu.monash.crypto.hve.param.KeyGenerationParameter;
+import edu.monash.crypto.hve.param.KeyParameter;
 
 /**
  * The abstraction of secret key generator, it uses the generator

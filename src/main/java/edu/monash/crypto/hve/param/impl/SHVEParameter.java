@@ -1,6 +1,6 @@
-package edu.monash.shangqi.hve.param.impl;
+package edu.monash.crypto.hve.param.impl;
 
-import edu.monash.shangqi.hve.param.CipherParameter;
+import edu.monash.crypto.hve.param.CipherParameter;
 
 /**
  * The scheme parameter of SHVE, it indicates the length of

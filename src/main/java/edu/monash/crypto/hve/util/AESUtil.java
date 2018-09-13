@@ -1,4 +1,4 @@
-package edu.monash.shangqi.hve.util;
+package edu.monash.crypto.hve.util;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 

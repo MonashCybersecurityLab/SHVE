@@ -1,6 +1,6 @@
-package edu.monash.shangqi.hve.core;
+package edu.monash.crypto.hve.core;
 
-import edu.monash.shangqi.hve.param.CipherParameter;
+import edu.monash.crypto.hve.param.CipherParameter;
 
 import java.util.List;
 
