@@ -1,7 +1,7 @@
 # SHVE
-This repository holds the implementation of Symmetric-key Hidden Vector Encryption (SHVE) Scheme.
+This repository holds the implementation of our Symmetric-key Hidden Vector Encryption (SHVE) Scheme.
 
-As a new cryptographic primitive, SHVE is the first HVE scheme only relies on the symmetric-key building block. It is much faster than its pairing-based antecedents. This work is a part of our ACM CCS'18 paper[1].
+As a new cryptographic primitive, SHVE is the first HVE scheme only relies on the symmetric-key building block. It is much faster than its pairing-based antecedents. This work is a part of our ACM CCS'18 paper[1]. For the performance comparison, please refer to the paper.
 
 ## Requirements
 
@@ -13,17 +13,23 @@ As a new cryptographic primitive, SHVE is the first HVE scheme only relies on th
 ## Installation
 
 ```bash
-git
+git clone https://github.com/MonashCybersecurityLab/SHVE.git
+cd SHVE
+mvn package
 ```
 
+That's all for the building process. You can include the java package in your project and use our SHVE scheme via the provided APIs.
 
+## Usage
 
+To see the example, please check the main function of **edu.monash.shangqi.hve.SHVE** in the package.
 
+The provided APIs capture the four basic operations (`setup`, `keyGen`, `Enc`, `Query`) for the HVE scheme with some modification. Specifically, the implementation is for the predicate-only construction, which means the message for `Enc` is always "True".
 
-## Discussion
+## Feedback
 
-- 
-- Email the author: Shangqi.lai@monash.edu
+- [Submit an issue](https://github.com/MonashCybersecurityLab/SHVE/issues/new)
+- Email the authors: shangqi.lai@monash.edu, sikhar.patranabis@iitkgp.ac.in
 
 ## Reference
 

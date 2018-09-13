@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>edu.monash.shangqi</groupId>
-    <artifactId>hve</artifactId>
+    <artifactId>shve</artifactId>
     <version>1.0</version>
 
     <properties>
