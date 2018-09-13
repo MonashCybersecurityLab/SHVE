@@ -70,7 +70,7 @@ public class SHVE {
     }
 
     public static void main(String[] args) {
-        long n = 5000;  // change n to test different size of vectors
+        long n = 1000000;  // change n to test different size of vectors
         long start, end;
 
         KeyParameter MSK = setup(n);

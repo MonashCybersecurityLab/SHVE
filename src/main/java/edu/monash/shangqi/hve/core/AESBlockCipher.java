@@ -14,7 +14,7 @@ public abstract class AESBlockCipher implements SymmetricBlockCipher {
 
     protected boolean forEncryption;
     protected CipherParameter key;
-    protected int inBytes = 16;
+    int inBytes = 16;
     int outBytes = 16;
 
     AESBlockCipher() {}

@@ -61,7 +61,7 @@ public class SHVEPredicateEngine
             }
            return res;
 
-        } else if (inLen == this.inBytes) {    // encryption
+        } else if (inLen == this.getInputBlockSize()) {    // encryption
             SHVEEncryptionParameter encParams = (SHVEEncryptionParameter)this.key;
             if(encParams.isMaster()) {  // only can use the msk to encrypt
                 SHVEMasterSecretKeyParameter pk = encParams.getMasterSecretKey();
