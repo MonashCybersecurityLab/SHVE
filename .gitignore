@@ -1,6 +1,9 @@
 # Maven #
 target/
 
+# Environment #
+.DS_Store
+
 # IDEA #
 .idea/
 *.iml
