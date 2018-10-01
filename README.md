@@ -1,7 +1,7 @@
 # SHVE
 This repository holds the implementation of our Symmetric-key Hidden Vector Encryption (SHVE) Scheme.
 
-As a new cryptographic primitive, SHVE is the first HVE scheme only relies on the symmetric-key building block. It is much faster than its pairing-based antecedents. This work is a part of our ACM CCS'18 paper[1]. For the performance comparison, please refer to the paper.
+As a new cryptographic primitive, SHVE is the first HVE scheme only relies on the symmetric-key building block. It is much faster than its pairing-based antecedents. This work is a part of our ACM CCS'18 paper [1]. For the performance comparison, please refer to the paper.
 
 ## Requirements
 
